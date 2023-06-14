@@ -1,0 +1,22 @@
+.add-project-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 3%;
+  padding-top: 3%;
+}
+
+.project-table-main {
+  width: 100%;
+}
+
+.upload-list-inline .ant-upload-list-item {
+  float: left;
+  width: 200px;
+  margin-inline-end: 8px;
+}
+
+.ant-upload-rtl.upload-list-inline .ant-upload-list-item {
+  float: right;
+}

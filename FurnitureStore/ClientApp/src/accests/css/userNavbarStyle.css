@@ -1,0 +1,8 @@
+.nav{
+    background-color: transparent;
+    position:fixed;
+    z-index: 1;
+    opacity: 50%;
+    width: 100%;
+    background-color: black;
+}

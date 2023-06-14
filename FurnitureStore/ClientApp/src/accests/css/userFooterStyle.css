@@ -1,0 +1,32 @@
+.footer-main {
+  /* height: 50px; */
+  background-color: #f1c376;
+  display: flex;
+  position:relative;
+  justify-content: space-between;
+  z-index: 9999;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.media-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:transparent;
+  color: black;
+  border-style: solid;
+  border-color: black;
+  padding: 0%!important;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.media-button:hover{
+  color: black;
+}
+.media-button:active{
+  color: black;
+}

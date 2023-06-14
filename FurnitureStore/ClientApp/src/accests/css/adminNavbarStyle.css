@@ -1,0 +1,19 @@
+.nav{
+    background-color: #293b38;
+    /* position: fixed; */
+    height: 64px;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    right: 0;
+    /* width: 100%; */
+}
+.sidebar-togler{
+    color:rgba(255, 255, 255, 0.6);
+    height: 40px;
+    width: 40px;
+}
+.sidebar-togler:hover {
+    color:rgba(255, 255, 255, 0.87);
+    background-color: transparent;
+  }

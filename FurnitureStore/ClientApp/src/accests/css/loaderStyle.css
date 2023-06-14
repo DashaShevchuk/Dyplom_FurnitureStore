@@ -1,0 +1,16 @@
+.spinner-div {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+  }
+  
+  .spinner {
+    color: #293b38;
+  }
+  

@@ -1,0 +1,31 @@
+.projects-main {
+  width: 100%;
+  background-color: #f7e6c4;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 90%;
+  height: 90%;
+  margin-top: 60px;
+  margin-left: 70px;
+}
+@media (max-width: 576px) {
+}
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+  .projects-main {
+    height: 100vh;
+  }
+}
+@media (min-width: 1200px) {
+  .projects-main {
+    height: 100vh;
+  }
+}

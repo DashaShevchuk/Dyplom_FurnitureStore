@@ -1,0 +1,19 @@
+.side-bar-visible {
+    margin-left: 240px;
+  }
+  .side-bar-hiden {
+    margin-left: 0px;
+  }
+  .side-bar {
+    transition: margin-left 0.5s ease;
+  }
+  .app{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e8e9e5;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
