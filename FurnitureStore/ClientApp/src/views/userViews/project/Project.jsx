@@ -35,7 +35,7 @@ class Project extends Component {
     const { mainImage } = this.state;
     const { data } = this.props;
     const mainImagePath =
-      mainImage || (data && data.ProjectImages && data.ProjectImages[0]);
+      mainImage || (data && data.ProjectImages && data.ProjectImages[0])? data && data.ProjectImages && data.ProjectImages[0] : "";
     console.log(data);
     return (
       <div className="project-main">
