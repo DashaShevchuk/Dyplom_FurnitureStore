@@ -101,6 +101,7 @@ const EditDialog = ({
         onClose();
         cleanup();
       }}
+      centered
       footer={null}
       title={project && project.Name}
       width={1000}

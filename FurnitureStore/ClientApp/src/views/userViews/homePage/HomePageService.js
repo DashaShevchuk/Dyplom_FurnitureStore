@@ -5,7 +5,7 @@ export default class HomePageService {
     static getCategories() {
         return axios.get(`${serverUrl}api/user/categories`)
     };
-    static sendEmail(model) {
-        return axios.post(`${serverUrl}api/user/feedback`,model)
+    static getProjects(model) {
+        return axios.post(`${serverUrl}api/user/projects/${model}`, model)
     };
 }

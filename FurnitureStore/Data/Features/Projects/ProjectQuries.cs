@@ -25,18 +25,32 @@ namespace FurnitureStore.Data.Features.Projects
         {
             return context.Categories.Select(x => new GetAdminCategoriesModel { Id = x.Id, Name = x.Name }).ToList();
         }
-        public List<GetClientCategoriesModel> GetClientCategories()
+        //public List<GetClientCategoriesModel> GetClientCategories()
+        //{
+        //    string path = $"{configuration.GetValue<string>("CategoriesImagesFolderPath")}/";
+
+        //    return context.Categories.Select(x => new GetClientCategoriesModel { Id = x.Id, Name = x.Name, ImagePath = path + x.ImagePath }).ToList();
+        //}
+        public List<string> GetClientCategories()
         {
-            string path = $"{configuration.GetValue<string>("CategoriesImagesFolderPath")}/";
-
-            return context.Categories.Select(x => new GetClientCategoriesModel { Id = x.Id, Name = x.Name, ImagePath = path+x.ImagePath }).ToList();
+            return context.Categories.Select(x => x.Name).ToList();
         }
-
         public Category GetCategoryByProjectId(int projectId)
         {
             ProjectToCategory projectToCategory = context.ProjectToCategories.FirstOrDefault(x => x.ProjectId == projectId);
             Category category = context.Categories.FirstOrDefault(x => x.Id == projectToCategory.CategoryId);
             return category;
+
+            // Category category = context.Categories.FirstOrDefault(cat =>
+            //cat.ProjectCaregory.Any(pc => pc.ProjectId == projectId));
+
+            //if (projectToCategory != null)
+            //{
+            //    Category category = context.Categories.FirstOrDefault(x => x.Id == projectToCategory.CategoryId);
+            //    return category;
+            //}
+
+            // return null;
         }
 
         public Project GetProjectById(int projectId)
@@ -53,27 +67,53 @@ namespace FurnitureStore.Data.Features.Projects
                                          .Select(p => path + p.Image.Name);
             return images;
         }
-        public List<ProjectCardsModel> GetProjectsByCategoryName(string categoryName)
+        //public List<ProjectCardsModel> GetProjectsByCategoryName(string categoryName)
+        //{
+        //    Category category = context.Categories.FirstOrDefault(x => x.Name == categoryName);
+        //    List<Project> projectInCategory = context.ProjectToCategories
+        //        .Where(x => x.CategoryId == category.Id)
+        //        .Select(y => y.Project)
+        //        .ToList();
+        //    List<ProjectCardsModel> resultProjects = new List<ProjectCardsModel>();
+        //    foreach (var item in projectInCategory)
+        //    {
+        //        ProjectCardsModel project = new()
+        //        {
+        //            Id = item.Id,
+        //            Name = item.Name,
+        //        };
+        //        project.ProjectImages = GetStringProjectImages(project.Id);
+        //        resultProjects.Add(project);
+        //    }
+        //    return resultProjects;
+        //}
+        public List<ProjectModel> GetProjectsByCategoryName(string categoryName)
         {
             Category category = context.Categories.FirstOrDefault(x => x.Name == categoryName);
             List<Project> projectInCategory = context.ProjectToCategories
                 .Where(x => x.CategoryId == category.Id)
                 .Select(y => y.Project)
                 .ToList();
-            List<ProjectCardsModel> resultProjects = new List<ProjectCardsModel>();
+            List<ProjectModel> resultProjects = new List<ProjectModel>();
             foreach (var item in projectInCategory)
             {
-                ProjectCardsModel project = new()
+                ProjectModel project = new()
                 {
                     Id = item.Id,
                     Name = item.Name,
+                    Facade = item.Facade,
+                    Tabletop = item.Tabletop,
+                    Materials = item.Materials,
+                    Furniture = item.Furniture,
+                    Features = item.Features
                 };
                 project.ProjectImages = GetStringProjectImages(project.Id);
+                project.CategoryId= category.Id;
+                project.CategoryName= category.Name;
                 resultProjects.Add(project);
             }
             return resultProjects;
         }
-
         public IEnumerable<ProjectModel> GetProjects()
         {
             List<ProjectModel> projects = new();

@@ -33,7 +33,7 @@ namespace FurnitureStore.Controllers
         }
 
         [HttpPost]
-        [Route("get/projects/{categoryName}")]
+        [Route("projects/{categoryName}")]
         public IActionResult GetProjects(string categoryName)
         {
             var projects = projectService.GetProjectsInCategory(categoryName);

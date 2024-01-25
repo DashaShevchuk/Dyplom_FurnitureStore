@@ -39,23 +39,27 @@ namespace FurnitureStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Input all data");
+                return BadRequest(ModelState);
             }
-            var user = await userQueries.GetUserByEmail(model.Email) ;
+
+            var user = await userQueries.GetUserByEmail(model.Email);
             if (user == null)
             {
-                return BadRequest("Wrong email adres");
+                ModelState.AddModelError("Email", "Wrong email address");
+                return BadRequest(ModelState);
             }
-            var res = signInManager
-                .PasswordSignInAsync(user, model.Password, false, false).Result;
-            if (!res.Succeeded)
+
+            var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
+            if (!result.Succeeded)
             {
-                return BadRequest("Wrong password");
+                ModelState.AddModelError(string.Empty, "Wrong password");
+                return BadRequest(ModelState);
             }
 
             if (!await userManager.IsEmailConfirmedAsync(user))
             {
-                return Unauthorized();
+                ModelState.AddModelError(string.Empty, "Email not confirmed");
+                return Unauthorized(ModelState);
             }
 
             await signInManager.SignInAsync(user, isPersistent: false);

@@ -37,7 +37,11 @@ namespace FurnitureStore.Data.Service
             return projectQueries.GetAdminCategories();
         }
 
-        public List<GetClientCategoriesModel> GetClientCategories()
+        //public List<GetClientCategoriesModel> GetClientCategories()
+        //{
+        //    return projectQueries.GetClientCategories();
+        //}
+        public List<string> GetClientCategories()
         {
             return projectQueries.GetClientCategories();
         }
@@ -131,22 +135,22 @@ namespace FurnitureStore.Data.Service
         {
             IEnumerable<ProjectModel> projects = projectQueries.GetProjects();
             int count = projects.Count();
-            int skipPage = (model.Page - 1) * model.PageSize;
+            //int skipPage = (model.Page - 1) * model.PageSize;
 
-            if (model.SearchString != null)
-            {
-                projects = projects.Where(x => x.Name.ToLower().StartsWith(model.SearchString.ToLower())
-                                         || x.CategoryName.ToLower().StartsWith(model.SearchString.ToLower())
-                                         || x.Facade.ToLower().StartsWith(model.SearchString.ToLower())
-                                         || x.Tabletop.Contains(model.SearchString));
-            }
+            //if (model.SearchString != null)
+            //{
+            //    projects = projects.Where(x => x.Name.ToLower().StartsWith(model.SearchString.ToLower())
+            //                             || x.CategoryName.ToLower().StartsWith(model.SearchString.ToLower())
+            //                             || x.Facade.ToLower().StartsWith(model.SearchString.ToLower())
+            //                             || x.Tabletop.Contains(model.SearchString));
+            //}
 
-            if (model.SortOrder != null && model.ColumnKey != null)
-            {
-                projects = SortProjects(projects, model.ColumnKey, model.SortOrder);
-            }
+            //if (model.SortOrder != null && model.ColumnKey != null)
+            //{
+            //    projects = SortProjects(projects, model.ColumnKey, model.SortOrder);
+            //}
 
-            projects = projects.Skip(skipPage).Take(model.PageSize);
+            //projects = projects.Skip(skipPage).Take(model.PageSize);
 
             var resultModel = new GetProjectsModel
             {
@@ -157,7 +161,11 @@ namespace FurnitureStore.Data.Service
             return resultModel;
         }
 
-        public List<ProjectCardsModel> GetProjectsInCategory(string categoryName)
+        //public List<ProjectCardsModel> GetProjectsInCategory(string categoryName)
+        //{
+        //    return projectQueries.GetProjectsByCategoryName(categoryName);
+        //}
+        public List<ProjectModel> GetProjectsInCategory(string categoryName)
         {
             return projectQueries.GetProjectsByCategoryName(categoryName);
         }

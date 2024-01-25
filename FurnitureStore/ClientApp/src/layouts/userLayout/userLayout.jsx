@@ -32,9 +32,9 @@ const UserLayout = () => {
           </Suspense>
         </main>
       </div>
-      <footer>
+      {/* <footer>
         <UserFooter />
-      </footer>
+      </footer> */}
     </div>
   );
 };

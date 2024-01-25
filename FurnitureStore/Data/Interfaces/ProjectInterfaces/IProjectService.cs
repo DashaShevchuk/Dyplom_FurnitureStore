@@ -11,13 +11,15 @@ namespace FurnitureStore.Data.Interfaces.ProjectInterfaces
     {
         public List<GetAdminCategoriesModel> GetAdminCategories();
 
-        public List<GetClientCategoriesModel> GetClientCategories();
+        //public List<GetClientCategoriesModel> GetClientCategories();
+        public List<string> GetClientCategories();
 
         public HttpStatusCode AddProject(AddProjectModel model);
 
         public GetProjectsModel GetProjects(ProjectPageModel model);
 
-        public List<ProjectCardsModel> GetProjectsInCategory(string categoryName);
+        //public List<ProjectCardsModel> GetProjectsInCategory(string categoryName);
+        public List<ProjectModel> GetProjectsInCategory(string categoryName);
 
         public HttpStatusCode DeleteProject(int projectId);
 

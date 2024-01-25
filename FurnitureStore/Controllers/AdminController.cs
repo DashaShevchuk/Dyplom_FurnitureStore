@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace FurnitureStore.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [ApiController]
     [Produces("application/json")]
     [Route("api/[controller]")]

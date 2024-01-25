@@ -6,6 +6,7 @@ const DeleteDialog = ({ isOpen, onClose, project, onOk }) => {
       open={isOpen}
       onCancel={onClose}
       onOk={onOk}
+      centered
       title="Ви впевненні, що хочете видалити проект?"
     >
       <p>Ви хочете видалити проект {project && project.Name}?</p>

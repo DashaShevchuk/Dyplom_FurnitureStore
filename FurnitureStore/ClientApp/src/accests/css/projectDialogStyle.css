@@ -1,0 +1,23 @@
+.ant-input-outlined:hover,
+.ant-input-outlined:active{
+    border-color: #293b38;
+    background-color: #ffffff;
+}
+.ant-input-outlined:focus, 
+.ant-input-outlined:focus-within {
+    border-color: #2f423f;
+    box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+    outline: 0;
+    background-color: #ffffff;
+}
+.ant-input-outlined:focus, 
+.ant-input-outlined:focus-within {
+    border-color: #364d49;
+    box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+    outline: 0;
+    background-color: #ffffff;
+}
+.ant-input-outlined:hover {
+    border-color: #4f6e69;
+    background-color: #ffffff;
+}

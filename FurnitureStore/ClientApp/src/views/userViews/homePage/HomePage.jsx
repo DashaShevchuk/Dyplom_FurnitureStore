@@ -2,378 +2,389 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import get from "lodash.get";
 import * as getCategoriesListActions from "./reducer";
+import * as getProjectsListActions from "./reducer";
 import * as sendEmailListActions from "./reducer";
-import Background1 from "../../../accests/images/img1.jpg";
-import Background2 from "../../../accests/images/img2.jpg";
+
 import "../../../accests/css/userHomePageStyle.css";
+import girl1 from "../../../accests/images/girl1.svg";
+import girl2 from "../../../accests/images/girl2.svg";
+import girl3 from "../../../accests/images/girl3.svg";
+import girl4 from "../../../accests/images/girl4.svg";
+import largeLogo from "../../../accests/images/big logo.svg";
 import {
   Typography,
   Button,
   Form,
+  Card,
+  Popover,
+  List,
+  Space,
   Input,
   message,
+  ConfigProvider,
   Col,
   Row,
   Select,
+  Divider,
 } from "antd";
-import InputMask from "react-input-mask";
-import Loader from "../../../components/loader/loader";
-import CategoryCard from "../../../components/userComponents/categoryCard";
+import Icon from "@ant-design/icons";
+import {
+  InstagramOutlined,
+  PhoneOutlined,
+  RightCircleOutlined,
+  LeftCircleOutlined,
+} from "@ant-design/icons";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import ProjectCard from "../../../components/userComponents/projectCard";
+import Slider from "react-slick";
+import InstagramIcon from "../../../accests/images/instagram-icon.png";
+import TelegramIcon from "../../../accests/images/telegram-icon.png";
+import PhoneIcon from "../../../accests/images/phone-icon.png";
 
+const Option = Select.Option;
 const { Title } = Typography;
 const { TextArea } = Input;
 
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <RightCircleOutlined
+      className={className}
+      style={{
+        ...style,
+        fontSize: "30px",
+        color: "#293b38",
+        cursor: "pointer",
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <LeftCircleOutlined
+      className={className}
+      style={{
+        ...style,
+        fontSize: "30px",
+        color: "#293b38",
+        cursor: "pointer",
+      }}
+      onClick={onClick}
+    />
+  );
+}
 class UserHomePage extends Component {
-
-  state = {
-    name: "",
-    email: "",
-    phone: "",
-    category: "",
-    note: "",
-  };
-
   componentDidMount() {
     this.props.getCategories();
   }
-
-  sendEmail=()=> {
-    const model = {
-      Name: this.state.name,
-      Email: this.state.email,
-      Phone: this.state.phone,
-      Category: this.state.category,
-      Note: this.state.note,
-    };
-    this.props.sendEmail(model);
-    message.success("Повідомлення надіслано");
+  componentDidUpdate(prevProps) {
+    if (prevProps.categories !== this.props.categories) {
+      const defaultCategory = this.props.categories[0];
+      this.setState({ defaultCategory }, () => {
+        this.props.getProjects(defaultCategory);
+      });
+    }
   }
+  toProjects = (e) => {
+    e.preventDefault();
+    const element = document.getElementById("projects");
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        transitionDelay: "250ms",
+      });
+    }
+  };
+  handleCategoryChange = (value) => {
+    this.props.getProjects(value);
+  };
+  handlePhoneClick = () => {
+    const phoneNumber = "+380687639361";
+    window.location.href = `tel:${phoneNumber}`;
+  };
+
   render() {
-    const { data } = this.props;
-    console.log(data);
+    const { categories, projects } = this.props;
+
+    var settings = {
+      dots: false,
+      infinite: true,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      initialSlide: 0,
+      responsive: [
+        {
+          breakpoint: 575.98,
+           settings: {
+             slidesToShow: 1,
+             slidesToScroll: 1,
+           },
+        },
+        {
+          breakpoint: 600,
+           settings: {
+             slidesToShow: 1,
+             slidesToScroll: 1,
+           },
+        },
+        {
+          breakpoint: 700,
+           settings: {
+             slidesToShow: 1,
+             slidesToScroll: 1,
+           },
+        },
+        {
+          breakpoint: 800,
+           settings: {
+             slidesToShow: 1,
+             slidesToScroll: 1,
+           },
+        },
+        {
+          breakpoint: 890,
+           settings: {
+             slidesToShow: 1,
+             slidesToScroll: 1,
+           },
+        },
+        {
+          breakpoint: 900,
+           settings: {
+             slidesToShow: 2,
+             slidesToScroll: 1,
+           },
+        },
+        {
+          breakpoint: 1000,
+           settings: {
+             slidesToShow: 2,
+             slidesToScroll: 1,
+           },
+        },
+        {
+          breakpoint: 1100,
+           settings: {
+             slidesToShow: 2,
+             slidesToScroll: 1,
+           },
+        },
+        {
+          breakpoint: 1196,
+           settings: {
+             slidesToShow: 2,
+             slidesToScroll: 1,
+           },
+        }
+      ],
+    };
     const cards =
-      data &&
-      data.map((element) => (
-        <CategoryCard
-          key={element.Id}
-          categoryName={element.Name}
-          categoryImagePath={element.ImagePath}
-        />
+      projects &&
+      projects.map((element, index) => (
+        <ProjectCard project={element} key={index} />
       ));
+    const servicesList = [
+      {
+        title: "Проконсультуємо",
+      },
+      {
+        title: "Зробимо заміри",
+      },
+      {
+        title: "Створимо дизайн проект",
+      },
+      {
+        title: "Виготовимо та встановимо меблі",
+      },
+    ];
+    const pricingList = [
+      {
+        title: "Від обраних матеріалів та фурнітури",
+      },
+      {
+        title: "Від термінів виконання роботи",
+      },
+      {
+        title: "Наявності матеріалів в країні",
+      },
+      {
+        title: "...",
+      },
+    ];
     return (
       <div>
-        <div>
-          <div
-            className="main"
-            id="main"
-            style={{ backgroundImage: `url(${Background1})` }}
-          >
-            <Title className="header-white-main">Все для вашого комфорту</Title>
-            <Title className="header-white-main" level={4}>
-              Меблі на замовлення
+        <div id="main">
+          <div className="image-container">
+            <img className="girl1" src={girl1} />
+          </div>
+          <div className="main-text">
+            <Title className="main-titles big-title">
+              Все для вашого комфорту
             </Title>
+            <Title level={3} className="main-titles">
+              Меблі під замовлення
+            </Title>
+            <div>
+              <Button
+                type="primary"
+                className="to-projects-btn m-3"
+                onClick={this.toProjects}
+              >
+                До проектів
+              </Button>
+            </div>
           </div>
-          <div className="projects" id="projects">
-            <div className="title-div">
-              <Title className="header-white" level={2}>
-                Наші проекти
-              </Title>
+        </div>
+        <div id="pricing">
+          <div className="about-us-text">
+            <div className="d-flex justify-content-center">
+            <Title className="main-titles">Хто ми</Title>
             </div>
-            <div className="container">
-              <div className="cards-div">{cards}</div>
+            <div className="d-flex justify-content-center">
+            <Title level={3} className="about-us">
+              Організаця яка зробить ваші меблі з досвідом понад 15 років Понад
+              100 розроблених проектів ДОПИСАТЬ НОРМАЛЬНОГО ТЕКСТА
+            </Title>
             </div>
           </div>
-          <div id="services" className="services">
-            <div className="title-div">
-              <Title className="header-black" level={2}>
-                Послуги
-              </Title>
-            </div>
-            <div className="title-div">
-              <Title className="header-black" level={4}>
-                Наша компанія пропонує весь спектр послуг з виготовлення меблів
-                на замовлення, щоб задовольнити всі ваші потреби і вподобання.
-                Ось детальніше про наші послуги:
-              </Title>
-            </div>
-            <div className="services-blocks">
-              <div className="green-block">
-                <Title className="header-white-bold" level={4}>
-                  Замір та передпроектна консультація на об’єкті
-                </Title>
-                <Title className="header-white" level={5}>
-                  Наші кваліфіковані фахівці здійснюють замір та передпроектну
-                  консультацію на об'єкті для урахування особливостей простору
-                  та ваших побажань.
-                </Title>
-              </div>
-              <div className="yellow-block">
-                <Title className="header-white-bold" level={4}>
-                  Розробка дизайнпроекта та його креслення
-                </Title>
-                <Title className="header-white" level={5}>
-                  Наша команда дизайнерів створює унікальний дизайнпроект, що
-                  відповідає вашим вимогам та стилю, з урахуванням вашої участі
-                  та індивідуальних пропозицій.
-                </Title>
-              </div>
-              <div className="yellow-block">
-                <Title className="header-white-bold" level={4}>
-                  Ознайомлення клієнта з матеріалами та фурнітурою
-                </Title>
-                <Title className="header-white" level={5}>
-                  Ми пропонуємо широкий вибір якісних матеріалів та фурнітури,
-                  які задовольнять ваші естетичні та функціональні потреби у
-                  виготовленні меблів.
-                </Title>
-              </div>
-              <div className="green-block">
-                <Title className="header-white-bold" level={4}>
-                  Формування вартості виробу
-                </Title>
-                <Title className="header-white" level={5}>
-                  Ми надаємо докладну інформацію про вартість виготовлення
-                  меблів на основі вашого дизайнпроекту та вимог, з прозорим
-                  розкриттям всіх складових витрат.
-                </Title>
-              </div>
-              <div className="green-block">
-                <Title className="header-white-bold" level={4}>
-                  Виготовлення та монтаж меблів
-                </Title>
-                <Title className="header-white" level={5}>
-                  Наші майстри виготовляють меблі з високою якістю та уважністю
-                  до деталей, використовуючи передові технології та традиційні
-                  ремісницькі методи.
-                </Title>
-              </div>
-              <div className="yellow-block">
-                <Title className="header-white-bold" level={4}>
-                  Гарантійне обслуговування меблів
-                </Title>
-                <Title className="header-white" level={5}>
-                  Ми надаємо гарантію на наші меблі на протязі 2 років і
-                  забезпечуємо безкоштовне виправлення будь-яких проблем або
-                  несправностей, щоб гарантувати ваше задоволення та тривале
-                  використання меблів.
-                </Title>
-              </div>
-            </div>
-            <div id="pricing" className="pricing">
-              <div className="title-div">
-                <Title className="header-black" level={2}>
-                  Ціноутворення
-                </Title>
-              </div>
-              <div className="title-div">
-                <Title className="header-black" level={4}>
-                  Ціноутворення в нашій компанії здійснюється з урахуванням
-                  численних факторів, що впливають на вартість меблів на
-                  замовлення. Перш за все, для точного визначення ціни необхідно
-                  провести детальну розробку дизайнпроекту, остаточне погодження
-                  розмірів, матеріалів та фурнітури.
-                </Title>
-              </div>
-              <div className="pricing-blocks">
-                <div className="yellow-block">
-                  <Title level={5} className="header-white">
-                    Ми враховуємо побажання та вимоги клієнта, а також інші
-                    фактори, такі як терміни виконання, особливості приміщення
-                    та використання ексклюзивних матеріалів. Після узгодження
-                    всіх цих аспектів точно визначається ціна нашої продукції.
-                  </Title>
-                </div>
-                <div className="row-pricing-blocks">
-                  <div className="green-block">
-                    <Title level={5} className="header-white">
-                      Зважаючи на складність та індивідуальність кожного
-                      проекту, попередня ціна на початковому етапі є
-                      орієнтовною. Для точної ціни проводиться детальний
-                      розрахунок, враховуючи всі специфічні деталі та умови
-                      виконання замовлення.
-                    </Title>
-                  </div>
-                  <div className="green-block">
-                    <Title level={5} className="header-white">
-                      Наша мета - забезпечити прозоре ціноутворення та чітке
-                      уявлення клієнта про вартість своїх меблів. Ми надаємо
-                      детальну інформацію про кожен етап ціноутворення,
-                      розкриваємо складові витрат і надаємо прозорий розрахунок,
-                      щоб клієнт був впевнений у відповідності ціни до своїх
-                      меблів.
-                    </Title>
-                  </div>
-                </div>
-                <div className="yellow-block">
-                  <Title level={5} className="header-white">
-                    Важливо зазначити, що остаточна ціна на меблі під замовлення
-                    буде визначена після уточнення всіх деталей проекту та
-                    погодження замовлення. Ми завжди готові надати додаткову
-                    інформацію та консультацію з питань ціноутворення, щоб
-                    допомогти нашим клієнтам прийняти відповідні рішення
-                    стосовно своїх меблевих потреб.
-                  </Title>
-                </div>
-              </div>
-            </div>
-            <div
-              className="contacts"
-              id="contacts"
-              style={{ backgroundImage: `url(${Background2})` }}
-            >
-              <div className="title-div">
-                <Title className="header-white-bold" level={2}>
-                  Зворотній зв'язок
-                </Title>
-              </div>
-              <div>
-                <Form
-                  name="contactForm"
-                  className="contactForm"
-                  layout="vertical"
-                  autoComplete="off"
-                  onFinish={this.sendEmail}
-                  labelCol={{
-                    span: 20,
-                  }}
-                  wrapperCol={{
-                    span: 25,
-                  }}
-                  initialValues={{
-                    size: "large",
-                  }}
-                >
-                  <Row>
-                    <Col span={24}>
-                      <Title level={5} className="header-white">
-                        Напишіть нам
+          <div className="image-container2">
+            <img className="large-logo-image" src={largeLogo} />
+          </div>
+        </div>
+        <div id="services">
+          <div className="image-container">
+            <img className="girl1" src={girl2} />
+          </div>
+          <div className="services-list">
+            <Title className="main-titles">Послуги</Title>
+            <List
+              itemLayout="horizontal"
+              dataSource={servicesList}
+              split={false}
+              className="mt-3"
+              renderItem={(item, index) => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={<div className="list-index-yellow"></div>}
+                    title={
+                      <Title level={3} className="main-titles list-item d-flex align-items-center">
+                        {item.title}
                       </Title>
-                    </Col>
-                    <Col span={24}>
-                      <Form.Item
-                        name="name"
-                        label={
-                          <label style={{ color: "white" }}>Ваше ім'я</label>
-                        }
-                        rules={[
-                          {
-                            required: true,
-                            message: "Поле не може бути пустим",
-                          },
-                        ]}
-                      >
-                        <Input
-                          onChange={(e) => {
-                            this.setState({ name: e.target.value });
-                          }}
-                        />
-                      </Form.Item>
-                      <Form.Item
-                        name="email"
-                        label={<label style={{ color: "white" }}>Email</label>}
-                        rules={[
-                          {
-                            required: true,
-                            message: "Поле не може бути пустим",
-                          },
-                        ]}
-                      >
-                        <Input
-                          onChange={(e) => {
-                            this.setState({ email: e.target.value });
-                          }}
-                        />
-                      </Form.Item>
-                      <Form.Item
-                        name="phone"
-                        label={
-                          <label style={{ color: "white" }}>
-                            Ваш номер телефону
-                          </label>
-                        }
-                        rules={[
-                          {
-                            required: true,
-                            message: "Поле не може бути пустим",
-                          },
-                        ]}
-                      >
-                        <InputMask
-                          mask="+38 (999) 999-9999"
-                          value={this.state.phone}
-                          onChange={(e) => {
-                            this.setState({ phone: e.target.value });
-                          }}
-                        >
-                          {(inputProps) => <Input {...inputProps} />}
-                        </InputMask>
-                      </Form.Item>
-                      <Form.Item
-                        name="category"
-                        label={
-                          <label style={{ color: "white" }}>
-                            Який проект вас цікавть?
-                          </label>
-                        }
-                        rules={[
-                          {
-                            required: true,
-                            message: "Поле не може бути пустим",
-                          },
-                        ]}
-                      >
-                        <Select
-                          onChange={(value) => {
-                            this.setState({ category: value });
-                          }}
-                        >
-                          {data &&
-                            data.map((category) => (
-                              <Select.Option
-                                key={category.Id}
-                                value={category.Name}
-                              >
-                                {category.Name}
-                              </Select.Option>
-                            ))}
-                        </Select>
-                      </Form.Item>
-                      <Form.Item
-                        name="note"
-                        label={
-                          <label style={{ color: "white" }}>Примітка</label>
-                        }
-                        rules={[
-                          {
-                            required: true,
-                            message: "Поле не може бути пустим",
-                          },
-                        ]}
-                      >
-                        <TextArea
-                          rows={4}
-                          onChange={(e) => {
-                            this.setState({ note: e.target.value });
-                          }}
-                        />
-                      </Form.Item>
-                      <Form.Item>
-                        <Button
-                          type="primary"
-                          htmlType="submit"
-                          style={{
-                            background: "#F1C376",
-                            borderColor: "#F1C376",
-                          }}
-                        >
-                          Надіслати
-                        </Button>
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                </Form>
-              </div>
-            </div>
+                    }
+                  />
+                </List.Item>
+              )}
+            />
+          </div>
+        </div>
+        <div id="projects">
+          <div className="title-div">
+            <Title className="main-titles">Розробленні проекти</Title>
+            <Select
+              defaultValue="Кухня"
+              bordered={false}
+              size="large"
+              className="categoriesSelect"
+              onChange={this.handleCategoryChange}
+             
+              style={{
+                width: 200,
+              }}
+            >
+              {categories &&
+                categories.map((category, index) => (
+                  <Option
+                    key={index}
+                    value={category}
+                    
+                    style={{
+                      background: category === "Кухня" ? "white" : "white",
+                    }}
+                  >
+                    {category}
+                  </Option>
+                ))}
+            </Select>
+          </div>
+          <div className="slider-div">
+            <Slider {...settings}>{cards}</Slider>
+          </div>
+        </div>
+        <div id="pricing">
+          <div className="prising-list">
+            <Title className="main-titles">Від чого залежить ціна?</Title>
+            <List
+              itemLayout="horizontal"
+              dataSource={pricingList}
+              split={false}
+              className="mt-3"
+              renderItem={(item, index) => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={<div className="list-index-green"></div>}
+                    title={
+                      <Title level={3} className="main-titles list-item">
+                        {item.title}
+                      </Title>
+                    }
+                  />
+                </List.Item>
+              )}
+            />
+          </div>
+          <div className="image-container2">
+            <img className="girl3" src={girl3} />
+          </div>
+        </div>
+        <div id="contacts">
+          <div className="image-container">
+            <img className="girl1" src={girl4} />
+          </div>
+          <div className="links-text">
+            <Title className="main-titles">Як з нами зв'язатися</Title>
+            <a
+              href="https://www.instagram.com/furniture_mspace/"
+              style={{ textDecoration: "none" }}
+            >
+              <Title level={3} class="link">
+                <div className="col-2">
+                  <img src={InstagramIcon} />
+                </div>{" "}
+                @furniture_mspace
+              </Title>
+            </a>
+            <a
+              href="#"
+              onClick={this.handlePhoneClick}
+              style={{ textDecoration: "none" }}
+            >
+              <Title level={3} class="link">
+                <div>
+                  <img src={PhoneIcon} />
+                </div>{" "}
+                +380 68 763 93 61
+              </Title>
+            </a>
+            <a
+              href="https://t.me/+380687639361"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
+            >
+              <Title level={3} class="link">
+                <div>
+                  <img src={TelegramIcon} />
+                </div>{" "}
+                +380 68 763 93 61
+              </Title>
+            </a>
           </div>
         </div>
       </div>
@@ -383,7 +394,8 @@ class UserHomePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    data: get(state, "homePage.list.data"),
+    categories: get(state, "homePage.list.categories"),
+    projects: get(state, "homePage.list.projects"),
     loading: get(state, "homePage.list.loading"),
     failed: get(state, "homePage.list.failed"),
     success: get(state, "homePage.list.success"),
@@ -395,8 +407,8 @@ const mapDispatchToProps = (dispatch) => {
     getCategories: () => {
       dispatch(getCategoriesListActions.getCategories());
     },
-    sendEmail: (model) => {
-      dispatch(sendEmailListActions.sendEmail(model));
+    getProjects: (filter) => {
+      dispatch(getProjectsListActions.getProjects(filter));
     },
   };
 };

@@ -1,55 +1,56 @@
 import React, { useState } from "react";
-import {
-  CIcon,
-  CNavItem,
-  CContainer,
-  CNavLink,
-  CNavbar,
-  CNavbarBrand,
-  CNavbarToggler,
-  CNavbarNav,
-  CForm,
-  CCollapse,
-} from "@coreui/react";
+import { Layout, Menu, ConfigProvider} from "antd";
 import navigation from "../../navs/userNavs";
 import "../../accests/css/userNavbarStyle.css";
+import logo from "../../accests/images/logo.svg";
+const { Header, Content, Footer } = Layout;
 
 const UserNavbar = () => {
-  const [visible, setVisible] = useState(false);
-  const isNavbarExpanded = visible ? 'expanded' : 'collapsed';
-  const handleMenuClick = (e, id) => {
+  const [selectedItem, setSelectedItem] = useState(null);
+ 
+  const handleMenuClick = (e, id, key) => {
     e.preventDefault();
+    setSelectedItem(key);
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({
+        behavior: "smooth",
+        transitionDelay: "250ms",
+      });
     }
-    setVisible(false);
   };
   return (
-    <React.Fragment>
-      <CNavbar expand="sm" className="nav" colorScheme="dark" >
-        <CContainer fluid>
-          <CNavbarBrand href="#" className="mx-auto">
-            {/* <CIcon icon={logo} height={48} alt="Logo" /> */}
-           MSpace
-          </CNavbarBrand>
-          <CNavbarToggler onClick={() => setVisible(!visible)} />
-          <CForm>
-          <CCollapse className="navbar-collapse" visible={visible}>
-              <CNavbarNav className="d-none d-md-flex me-auto">
-                {navigation.items.map((item) => {
-                  return (
-                    <CNavItem key={item.label}>
-                      <CNavLink href={item.url} onClick={(e) => handleMenuClick(e, item.url)}>{item.label}</CNavLink>
-                    </CNavItem>
-                  );
-                })}
-              </CNavbarNav>
-          </CCollapse>
-          </CForm>
-        </CContainer>
-      </CNavbar>
-    </React.Fragment>
+    <Header className="header">
+      <div className="logo">
+        <img src={logo} className="image"/>
+      </div>
+      <Menu
+        theme="light"
+        mode="horizontal"
+        className="menu"
+        selectedKeys={selectedItem ? [selectedItem.toString()] : []}
+        onMouseLeave={() => setSelectedItem(null)}
+        items={navigation.items.map((item, index) => {
+          const key = index + 1;
+          return {
+            key,
+            label: (
+              <a
+                href={item.url}
+                onClick={(e) => handleMenuClick(e, item.url, key)}
+                className={`menu-item ${selectedItem === key ? 'selected' : ''}`}
+              >
+                {item.label}
+              </a>
+            ),
+          };
+        })}
+        style={{
+          flex: 1,
+          minWidth: 0
+        }}
+      />
+    </Header>
   );
 };
 export default UserNavbar;

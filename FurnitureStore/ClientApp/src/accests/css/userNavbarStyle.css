@@ -1,8 +1,49 @@
-.nav{
-    background-color: transparent;
-    position:fixed;
-    z-index: 1;
-    opacity: 50%;
+.header {
+    padding: 0px;
+    position: relative;
     width: 100%;
-    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 0.5px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .menu {
+    padding: 0px;
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .logo {
+    padding: 0px;
+    padding-left: 10%;
+    border: none !important;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .menu-item {
+    text-decoration: none;
+    color: black !important;
+    padding: 10px 15px;
+  }
+  
+  .menu-item:hover,
+  .menu-item:first-child:first-child:first-child::after,
+  .menu-item.selected {
+    background-color: #293b38;
+    color: white !important;
+    border-radius: 5px;
+  }
+  
+  .image {
+    width: 20%;
+    height: 20%;
+  }
+  
+  .ant-menu-horizontal > .ant-menu-item::after,
+.ant-menu-horizontal > .ant-menu-submenu::after {
+  border-bottom: none !important;
+  transition: none !important;
 }

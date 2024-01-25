@@ -73,6 +73,7 @@ class AddProject extends Component {
   };
 
   render() {
+    console.log("Categories ", this.props.data );
     return (
       <div className="add-project-main">
         <Form autoComplete="off" onFinish={this.onFinish} ref={this.formRef} labelCol={{ span: 5 }}>

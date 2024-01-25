@@ -1,36 +1,49 @@
-import React from "react";
-import { Card } from "antd";
-import { Typography, Button } from "antd";
+import React, { useState } from "react";
+import { Card, Typography } from "antd";
 import { useHistory } from "react-router-dom";
+import ProjectDialog from "./projectDialog";
+import "../../accests/css/projectCardStyle.css";
+
 const { Meta } = Card;
 const { Title } = Typography;
 
-const ProjectCard = ({ project, category }) => {
-  //console.log(project && project);
-  const history = useHistory();
-  const handleCategoryClick = () => {
-    //console.log(category)
-   // console.log(`/projects/${category}/${project && project.Id}`);
-    history.push(`/projects/${category}/${project && project.Id}`);
-    // window.location.reload();
+const ProjectCard = ({ project }) => {
+  const [projectDialog, setProjectDialog] = useState(false);
+  
+  const projectDialogCloseClick = () => {
+    setProjectDialog(false);
   };
+
+  const projectDialogOpenClick = () => {
+    setProjectDialog(true);
+  };
+
+  const ProjectDialogComponent = () => {
+    return (
+      <ProjectDialog
+        isOpen={projectDialog}
+        onClose={projectDialogCloseClick}
+        project={project}
+      />
+    );
+  };
+
   return (
-    <Card
-    className="m-1"
-    onClick={handleCategoryClick}
-      hoverable
-      style={{
-        width: 240,
-      }}
-      cover={
-        <img
-          src={project && project.ProjectImages[0]}
-          style={{ height: 180 }}
-        />
-      }
-    >
-      <Meta title={project && project.Name} />
-    </Card>
+    <>
+      <Card
+        className="card"
+        onClick={projectDialogOpenClick}
+        hoverable
+        style={{
+          width: 350,
+          height: 350
+        }}
+        cover={<img src={project && project.ProjectImages[0]} style={{ height: 250 }} />}
+      >
+        <Meta title={project && project.Name} />
+      </Card>
+      {ProjectDialogComponent()}
+    </>
   );
 };
 

@@ -10,11 +10,13 @@ namespace FurnitureStore.Data.Interfaces.ProjectInterfaces
     {
         IEnumerable<ProjectModel> GetProjects();
 
-        List<ProjectCardsModel> GetProjectsByCategoryName(string categoryName);
+        List<ProjectModel> GetProjectsByCategoryName(string categoryName);
+       // List<ProjectCardsModel> GetProjectsByCategoryName(string categoryName);
 
         List<GetAdminCategoriesModel> GetAdminCategories();
 
-        List<GetClientCategoriesModel> GetClientCategories();
+        //List<GetClientCategoriesModel> GetClientCategories();
+        List<string> GetClientCategories();
 
         Category GetCategoryByProjectId(int projectId);
 
