@@ -3,13 +3,7 @@ import * as getListActions from "./reducer";
 import * as getCategoriesListActions from "./reducer";
 import * as getDeleteListActions from "./reducer";
 import * as getEditProjectListActions from "./reducer";
-import {
-  Table,
-  Space,
-  Input,
-  Button,
-  message,
-} from "antd";
+import { Table, Space, Input, Button, message } from "antd";
 import {
   EditOutlined,
   DeleteOutlined,
@@ -17,10 +11,10 @@ import {
 } from "@ant-design/icons";
 import { connect } from "react-redux";
 import get from "lodash.get";
-import Loader from "../../../components/loader/loader";
-import ShowMoreDialog from "../../../components/adminComponents/dialogs/showMoreDialog";
-import DeleteDialog from "../../../components/adminComponents/dialogs/deleteDialog";
-import EditDialog from "../../../components/adminComponents/dialogs/editDialog";
+import Loader from "../../../components/loaders/adminLoader";
+import ShowMoreDialog from "../../../components/adminComponents/dialogs/projects/showMoreDialog";
+import DeleteDialog from "../../../components/adminComponents/dialogs/projects/deleteDialog";
+import EditDialog from "../../../components/adminComponents/dialogs/projects/editDialog";
 import "../../../accests/css/adminPagesStyle.css";
 const { Search } = Input;
 
@@ -31,18 +25,20 @@ class ProjectsTable extends Component {
     deleteOpenDialog: false,
     editOpenDialog: false,
 
+    selectedProjectId: 0,
+
     sortOrder: null,
     columnKey: null,
     searchString: null,
     pagination: {
       current: 1,
-      pageSize: 10,
+      pageSize: 8,
     },
   };
 
   componentDidMount = () => {
     const model = {
-      CategoryName:"",
+      CategoryName: "",
       Current: this.state.pagination.current,
       PageSize: this.state.pagination.pageSize,
     };
@@ -62,7 +58,7 @@ class ProjectsTable extends Component {
     this.setState({ showMoreOpenDialog: false });
   };
 
-deleteDialogClickOpen = (e) => {
+  deleteDialogClickOpen = (e) => {
     this.setState({
       selectedProjectId: e.key,
       deleteOpenDialog: true,
@@ -84,9 +80,8 @@ deleteDialogClickOpen = (e) => {
   showMoreDialog = () => {
     const { data } = this.props;
     const { showMoreOpenDialog, selectedProjectId } = this.state;
-    const project = data && data.Projects.find(
-      (project) => project.Id === selectedProjectId
-    );
+    const project =
+      data && data.Projects.find((project) => project.Id === selectedProjectId);
 
     return (
       <ShowMoreDialog
@@ -100,9 +95,8 @@ deleteDialogClickOpen = (e) => {
   deleteDialog = () => {
     const { data } = this.props;
     const { selectedProjectId, deleteOpenDialog } = this.state;
-    const project = data && data.Projects.find(
-      (project) => project.Id === selectedProjectId
-    );
+    const project =
+      data && data.Projects.find((project) => project.Id === selectedProjectId);
     return (
       <DeleteDialog
         isOpen={deleteOpenDialog}
@@ -115,12 +109,10 @@ deleteDialogClickOpen = (e) => {
 
   editDialog = () => {
     const { data, categories } = this.props;
-    const { editOpenDialog, selectedProjectId } =
-      this.state;
-      const project = data && data.Projects.find(
-        (project) => project.Id === selectedProjectId
-      );
-      console.log(this.props)
+    const { editOpenDialog, selectedProjectId } = this.state;
+    const project =
+      data && data.Projects.find((project) => project.Id === selectedProjectId);
+    console.log(this.props);
     return (
       <EditDialog
         isOpen={editOpenDialog}
@@ -132,18 +124,18 @@ deleteDialogClickOpen = (e) => {
     );
   };
 
- deleteButtonClicked = () => {
+  deleteButtonClicked = () => {
     this.setState({ isLoading: true });
     this.props.deleteProject({ projectId: this.state.selectedProjectId });
     message.success("Проект видалено успішно");
     this.setState({ deleteOpenDialog: false }, () => {
       const model = {
-        CategoryName:"",
+        CategoryName: "",
         Page: this.state.pagination.current,
         PageSize: this.state.pagination.pageSize,
         SortOrder: this.state.order,
         ColumnKey: this.state.columnKey,
-        SearchString: this.state.searchString
+        SearchString: this.state.searchString,
       };
       this.props.getProjects(model);
     });
@@ -161,6 +153,7 @@ deleteDialogClickOpen = (e) => {
     formData.append("materials", project.Materials);
     formData.append("furniture", project.Furniture);
     formData.append("features", project.Features);
+    formData.append("price", project.Price);
     for (let i = 0; i < changedImages.length; i++) {
       formData.append("images", changedImages[i].originFileObj);
     }
@@ -169,24 +162,23 @@ deleteDialogClickOpen = (e) => {
     message.success("Проект відредаговано успішно");
     this.setState({ editOpenDialog: false }, () => {
       const model = {
-        CategoryName:"",
+        CategoryName: "",
         Page: this.state.pagination.current,
         PageSize: this.state.pagination.pageSize,
         SortOrder: this.state.order,
         ColumnKey: this.state.columnKey,
-        SearchString: this.state.searchString
+        SearchString: this.state.searchString,
       };
       this.props.getProjects(model);
     });
   };
-
 
   handleTableChange = (pagination, filters, sorter) => {
     const { current, pageSize } = pagination;
     this.setState({ pagination });
 
     const model = {
-      CategoryName:"",
+      CategoryName: "",
       Page: current,
       PageSize: pageSize,
       SortOrder: sorter.order,
@@ -201,7 +193,7 @@ deleteDialogClickOpen = (e) => {
       searchString: event.target.value,
     });
     const model = {
-      CategoryName:"",
+      CategoryName: "",
       Page: this.state.pagination.current,
       PageSize: this.state.pagination.pageSize,
       SortOrder: this.state.order,
@@ -213,7 +205,7 @@ deleteDialogClickOpen = (e) => {
 
   render() {
     const { data } = this.props;
-    const { isLoading } = this.state; 
+    const { isLoading } = this.state;
 
     const columns = [
       {
@@ -226,24 +218,35 @@ deleteDialogClickOpen = (e) => {
         dataIndex: "name",
         key: "name",
         sorter: true,
+        showSorterTooltip:false
       },
       {
         title: "Категорія",
         dataIndex: "category",
         key: "category",
         sorter: true,
+        showSorterTooltip:false
       },
       {
         title: "Фасад",
         dataIndex: "facade",
         key: "facade",
         sorter: true,
+        showSorterTooltip:false
       },
       {
         title: "Стільниця",
         dataIndex: "tabletop",
         key: "tabletop",
         sorter: true,
+        showSorterTooltip:false
+      },
+      {
+        title: "Ціна",
+        dataIndex: "price",
+        key: "price",
+        sorter: true,
+        showSorterTooltip:false
       },
       {
         title: "Дія",
@@ -278,76 +281,65 @@ deleteDialogClickOpen = (e) => {
           category: element.CategoryName,
           facade: element.Facade,
           tabletop: element.Tabletop,
+          price: element.Price,
         };
       });
 
-      return (
-        <div>
-           {isLoading && !data ? (
-            <Loader />
-          ) : (
-            <div className="project-table-main p-2">
-              <Search
-                placeholder="Введіть текст"
-                onChange={this.search}
-                style={{ marginBottom: 3 }}
-                enterButton={
-                  <Button
-                    type="primary"
-                    style={{ background: "#293b38" }}
-                    icon={<SearchOutlined />}
-                  ></Button>
-                }
-              />
-              <Table
-                dataSource={listProjects}
-                columns={columns}
-                total={data && data.TotalCount}
-                onChange={this.handleTableChange}
-                onRow={(record) => {
-                  return {
-                    onClick: () => {
-                      this.showMoreDialogClickOpen(record, record.key);
-                    },
+    return (
+      <div>
+        {isLoading && !data ? (
+          <Loader />
+        ) : (
+          <div className="project-table-main p-2">
+            <Search
+              placeholder="Введіть текст"
+              onChange={this.search}
+              style={{ marginBottom: 3 }}
+              enterButton={
+                <Button
+                  type="primary"
+                  style={{ background: "#293b38" }}
+                  icon={<SearchOutlined />}
+                ></Button>
+              }
+            />
+            <Table
+              dataSource={listProjects}
+              columns={columns}
+              total={data && data.TotalCount}
+              onChange={this.handleTableChange}
+              onRow={(record) => {
+                return {
+                  onClick: () => {
+                    this.showMoreDialogClickOpen(record, record.key);
+                  },
+                };
+              }}
+              pagination={{
+                current: this.state.currentPage,
+                pageSize: this.state.pagination.pageSize,
+                total: data && data.TotalCount,
+                onChange: (page, size) => {
+                  this.setState({
+                    currentPage: page,
+                    pageSize: size,
+                  });
+
+                  const model = {
+                    Page: page,
+                    PageSize: size,
                   };
-                }}
-                pagination={{
-                  current: this.state.currentPage,
-                  pageSize: this.state.pageSize,
-                  total: data && data.TotalCount,
-                  onChange: (page, size) => {
-                    this.setState({
-                      currentPage: page,
-                      pageSize: size,
-                    });
-      
-                    const model = {
-                      Page: page,
-                      PageSize: size,
-                    };
-                    this.props.getProjects(model);
-                  },
-                  onShowSizeChange: (page, size) => {
-                    this.setState({
-                      currentPage: page,
-                      pageSize: size,
-                    });
-      
-                    const model = {
-                      Page: page,
-                      PageSize: size,
-                    };
-                    this.props.getProjects(model);
-                  },
-                }}
-              />
-            </div>
-          )}
-          {this.deleteDialog()}
-          {this.editDialog()}
-           {this.showMoreDialog()}
-        </div>
-      );
+                  this.props.getProjects(model);
+                },
+              }}
+            />
+          </div>
+        )}
+        {this.deleteDialog()}
+        {this.editDialog()}
+        {this.showMoreDialog()}
+      </div>
+    );
   }
 }
 

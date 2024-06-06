@@ -3,9 +3,6 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "../../routes/userRoutes";
 import UserNavbar from "./navBar";
 import UserFooter from "./footer";
-import HomePage from "../../views/userViews/homePage/HomePage";
-import Projects from "../../views/userViews/projects/Projects";
-
 const UserLayout = () => {
   return (
     <div className="app">

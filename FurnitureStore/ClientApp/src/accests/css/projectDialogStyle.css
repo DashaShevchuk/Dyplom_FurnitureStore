@@ -21,3 +21,42 @@
     border-color: #4f6e69;
     background-color: #ffffff;
 }
+.dialog .ant-modal-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+  }
+  
+  .dialog .ant-modal-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+.project-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.modal-slider-div {
+    width: 90%;
+    height: 10%;
+    margin-left: 5%;
+  }
+.modal-slider-image{
+    width: 95%;
+    height: 10%;
+    padding: 0%;
+    margin: 0%;
+}
+.modal-slider-image-div{
+    padding-left: 5%;
+}
+.characteristics{
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+    padding: 3%;
+    background-color: #E5E8E8;
+    border-radius: 10px
+}

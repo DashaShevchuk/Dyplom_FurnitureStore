@@ -8,8 +8,6 @@ namespace FurnitureStore.Data.Entities
 
         public string Name { get; set; }
 
-        public string ImagePath { get; set; }
-
         public virtual ICollection<ProjectToCategory> ProjectCaregory { get; set; }
     }
 }

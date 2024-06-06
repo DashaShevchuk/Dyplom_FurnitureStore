@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import { Typography, Button, Form, Input, message } from "antd";
 import Background from "../../../accests/images/img3.jpg";
 import "../../../accests/css/loginPageStyle.css";
-import Loader from "../../../components/loader/loader";
 
 const { Title } = Typography;
 
@@ -15,14 +14,12 @@ class LoginPage extends Component {
     email: "",
     password: "",
     errorsServer: "",
-    isLoading: false,
   };
 
   componentDidUpdate(prevProps) {
     const { failed } = this.props;
 
     if (failed && !prevProps.failed) {
-      this.setState({ isLoading: false });
       message.error("Неправильний логін або пароль", 3);
     }
   }
@@ -41,11 +38,8 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { isLoading } = this.state;
 
     return (
-      <div>
-         <Loader isLoading={isLoading} />
         <div
           className="main"
           style={{ backgroundImage: "url(" + Background + ")" }}
@@ -117,7 +111,6 @@ class LoginPage extends Component {
               </Form.Item>
             </Form>
         </div>
-      </div>
     );
   }
 }

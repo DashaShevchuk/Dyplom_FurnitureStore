@@ -9,12 +9,12 @@ export default {
       url: 'aboutUs'
     },
     {
-      label: 'Послуги',
-      url: 'services'
-    },
-    {
       label: 'Проекти',
       url: 'projects'
+    },
+    {
+      label: 'Послуги',
+      url: 'services'
     },
     {
       label: 'Ціноутворення',

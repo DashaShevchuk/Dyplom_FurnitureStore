@@ -21,6 +21,8 @@ namespace FurnitureStore.Data.Models.AdminModels
 
         public string Features { get; set; }
 
+        public float Price { get; set; }
+
         public List<IFormFile> Images { get; set; }
     }
 }

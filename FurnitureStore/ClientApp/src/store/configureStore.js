@@ -9,9 +9,8 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { loginReducer } from '../views/adminViews/loginPage/reducer';
 import { addProjectReducer } from '../views/adminViews/addProject/reducer';
 import { projectsTableReducer } from '../views/adminViews/projectsTable/reducer';
+import { categoriesTableReducer } from '../views/adminViews/categoriesTable/reducer';
 import { homePageReducer } from '../views/userViews/homePage/reducer';
-import { projectsReducer } from '../views/userViews/projects/reducer';
-import { projectReducer } from '../views/userViews/project/reducer';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 //export const history = createHistory({ basename: baseUrl });
@@ -22,9 +21,10 @@ export default function configureStore(history,initialState) {
     login: loginReducer,
     addProject:addProjectReducer,
     projectsTable:projectsTableReducer,
+    categoriesTable:categoriesTableReducer,
     homePage:homePageReducer,
-    projects:projectsReducer,
-    project:projectReducer
+    // projects:projectsReducer,
+    // project:projectReducer
   };
 
   const middleware = [

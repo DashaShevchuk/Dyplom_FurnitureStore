@@ -11,7 +11,12 @@ export default {
         label: 'Додати проект',
         url: '/admin/addproject',
         icon:icon.cilPlaylistAdd
-      }
+      },
+      {
+        label: 'Категорії',
+        url: '/admin/categories',
+        icon:icon.cilList
+      },
     ],
   };
   

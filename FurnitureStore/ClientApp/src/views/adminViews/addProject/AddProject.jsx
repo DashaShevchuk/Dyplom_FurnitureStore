@@ -10,8 +10,7 @@ import {
   Typography,
   Upload,
   message,
-  Row,
-  Col,
+  InputNumber,
   Select,
 } from "antd";
 import "../../../accests/css/adminPagesStyle.css";
@@ -20,7 +19,7 @@ const { TextArea } = Input;
 
 class AddProject extends Component {
   formRef = React.createRef();
-  
+
   state = {
     name: "",
     facade: "",
@@ -28,6 +27,7 @@ class AddProject extends Component {
     materials: "",
     furniture: "",
     features: "",
+    price: 0,
     categoryId: 0,
     categories: [],
     files: [],
@@ -61,6 +61,7 @@ class AddProject extends Component {
     formData.append("materials", this.state.materials);
     formData.append("furniture", this.state.furniture);
     formData.append("features", this.state.features);
+    formData.append("price", this.state.price);
 
     for (let i = 0; i < this.state.files.length; i++) {
       formData.append("images", this.state.files[i]);
@@ -73,177 +74,201 @@ class AddProject extends Component {
   };
 
   render() {
-    console.log("Categories ", this.props.data );
+    console.log("Categories ", this.props.data);
     return (
       <div className="add-project-main">
-        <Form autoComplete="off" onFinish={this.onFinish} ref={this.formRef} labelCol={{ span: 5 }}>
-          <Row>
-            <Col span={24} className="d-flex justify-content-center ml-4">
-              <Title level={3}>Додавання проекту</Title>
-            </Col>
-            <Col span={24}>
-              <Form.Item
-                name="name"
-                label="Назва"
-                rules={[
-                  {
-                    required: true,
-                    message: "Введіть назву!",
-                  },
-                ]}
-                hasFeedback
+        <Form
+          className="add-project-form"
+          autoComplete="off"
+          onFinish={this.onFinish}
+          ref={this.formRef}
+          labelCol={{ span: 5 }}
+        >
+          <div className="d-flex justify-content-center">
+            <Title level={3}>Додавання проекту</Title>
+          </div>
+          <div>
+            <Form.Item
+              name="name"
+              label="Назва"
+              rules={[
+                {
+                  required: true,
+                  message: "Введіть назву!",
+                },
+              ]}
+              hasFeedback
+            >
+              <Input
+                onChange={(e) => {
+                  this.setState({ name: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              name="category"
+              label="Категорія"
+              rules={[
+                {
+                  required: true,
+                  message: "Оберіть категорію!",
+                },
+              ]}
+            >
+              <Select
+                onChange={(value) => {
+                  this.setState({ categoryId: value });
+                }}
               >
-                <Input
-                  onChange={(e) => {
-                    this.setState({ name: e.target.value });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item
-                name="category"
-                label="Категорія"
-                rules={[
-                  {
-                    required: true,
-                    message: "Оберіть категорію!",
-                  },
-                ]}
+                {this.state.categories.map((category) => (
+                  <Select.Option key={category.Id} value={category.Id}>
+                    {category.Name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item
+              name="facade"
+              label="Фасад"
+              rules={[
+                {
+                  required: true,
+                  message: "Введіть фасад!",
+                },
+              ]}
+              hasFeedback
+            >
+              <Input
+                onChange={(e) => {
+                  this.setState({ facade: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              name="tabletop"
+              label="Стільниця"
+              rules={[
+                {
+                  required: true,
+                  message: "Введіть стільниця!",
+                },
+              ]}
+              hasFeedback
+            >
+              <Input
+                onChange={(e) => {
+                  this.setState({ tabletop: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              name="materials"
+              label="Матеріали"
+              rules={[
+                {
+                  required: true,
+                  message: "Введіть матеріали!",
+                },
+              ]}
+              hasFeedback
+            >
+              <TextArea
+                rows={4}
+                onChange={(e) => {
+                  this.setState({ materials: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              name="furniture"
+              label="Фурнітура"
+              rules={[
+                {
+                  required: true,
+                  message: "Введіть фурнітуру!",
+                },
+              ]}
+              hasFeedback
+            >
+              <TextArea
+                rows={4}
+                onChange={(e) => {
+                  this.setState({ furniture: e.target.value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              name="price"
+              label="Ціна"
+              rules={[
+                {
+                  required: true,
+                  message: "Введіть ціну!",
+                },
+              ]}
+              hasFeedback
+            >
+              <InputNumber
+              className="w-100"
+                formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+                onChange={(value) => {
+                  this.setState({ price: value });
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              name="features"
+              label="Додатково"
+              rules={[
+                {
+                  required: true,
+                  message: "Введіть додаткову інформацію!",
+                },
+              ]}
+              hasFeedback
+            >
+              <TextArea
+                rows={4}
+                onChange={(e) => {
+                  this.setState({ features: e.target.value });
+                }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              name="images"
+              label="Зображення"
+              rules={[
+                {
+                  required: true,
+                  message: "Виберіть зображення!",
+                },
+              ]}
+            >
+              <Upload.Dragger
+                multiple
+                accept=".png, .jpeg, .jpg"
+                listType="picture-card"
+                onChange={this.onImageChange}
+                beforeUpload={() => false}
               >
-                <Select
-                  onChange={(value) => {
-                    this.setState({ categoryId: value });
-                  }}
-                >
-                  {this.state.categories.map((category) => (
-                    <Select.Option key={category.Id} value={category.Id}>
-                      {category.Name}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-              <Form.Item
-                name="facade"
-                label="Фасад"
-                rules={[
-                  {
-                    required: true,
-                    message: "Введіть фасад!",
-                  },
-                ]}
-                hasFeedback
+                <p className="ant-upload-text">Перетягніть фото сюди</p>
+                <Button>Натисніть щоб завантажити</Button>
+              </Upload.Dragger>
+            </Form.Item>
+          </div>
+          <div span={24} className="d-flex justify-content-center">
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ background: "#293b38", borderColor: "#293b38" }}
               >
-                <Input
-                  onChange={(e) => {
-                    this.setState({ facade: e.target.value });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item
-                name="tabletop"
-                label="Стільниця"
-                rules={[
-                  {
-                    required: true,
-                    message: "Введіть стільниця!",
-                  },
-                ]}
-                hasFeedback
-              >
-                <Input
-                  onChange={(e) => {
-                    this.setState({ tabletop: e.target.value });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item
-                name="materials"
-                label="Матеріали"
-                rules={[
-                  {
-                    required: true,
-                    message: "Введіть матеріали!",
-                  },
-                ]}
-                hasFeedback
-              >
-                <TextArea
-                  rows={4}
-                  onChange={(e) => {
-                    this.setState({ materials: e.target.value });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item
-                name="furniture"
-                label="Фурнітура"
-                rules={[
-                  {
-                    required: true,
-                    message: "Введіть фурнітуру!",
-                  },
-                ]}
-                hasFeedback
-              >
-                <TextArea
-                  rows={4}
-                  onChange={(e) => {
-                    this.setState({ furniture: e.target.value });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item
-                name="features"
-                label="Додатково"
-                rules={[
-                  {
-                    required: true,
-                    message: "Введіть додатково!",
-                  },
-                ]}
-                hasFeedback
-              >
-                <TextArea
-                  rows={4}
-                  onChange={(e) => {
-                    this.setState({ features: e.target.value });
-                  }}
-                />
-              </Form.Item>
-              <Form.Item
-                name="images"
-                label="Зображення"
-                rules={[
-                  {
-                    required: true,
-                    message: "Виберіть зображення!",
-                  },
-                ]}
-              >
-                <Upload.Dragger
-                  multiple
-                  accept=".png, .jpeg, .jpg"
-                  listType="picture-card"
-                  onChange={this.onImageChange}
-                  beforeUpload={() => false}
-                  className="upload-list-inline"
-                >
-                  <p className="ant-upload-text">Перетягніть фото сюди</p>
-                  <Button>Натисніть щоб завантажити</Button>
-                </Upload.Dragger>
-              </Form.Item>
-            </Col>
-            <Col span={24} className="d-flex justify-content-center">
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{ background: "#293b38", borderColor: "#293b38" }}
-                >
-                  Зберегти
-                </Button>
-              </Form.Item>
-            </Col>
-          </Row>
+                Зберегти
+              </Button>
+            </Form.Item>
+          </div>
         </Form>
       </div>
     );

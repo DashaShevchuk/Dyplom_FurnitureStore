@@ -1,9 +1,11 @@
-﻿using FurnitureStore.Data.Interfaces.ProjectInterfaces;
+﻿using FurnitureStore.Data.Interfaces.CategoriesInterfaces;
+using FurnitureStore.Data.Interfaces.ProjectInterfaces;
 using FurnitureStore.Data.Interfaces.UserInterfaces;
 using FurnitureStore.Data.Models.AdminModels;
 using FurnitureStore.Data.Models.UserModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace FurnitureStore.Controllers
 {
@@ -13,18 +15,19 @@ namespace FurnitureStore.Controllers
     public class UserController : Controller
     {
         private readonly IProjectService projectService;
-        private readonly IUserService userService;
+        private readonly ICategoryService categoryService;
 
-        public UserController(IProjectService _projectService, IUserService _userService)
+        public UserController(IProjectService projectService, 
+                              ICategoryService categoryService)
         {
-            projectService = _projectService;
-            userService = _userService;
+            this.projectService = projectService;
+            this.categoryService = categoryService;
         }
         [HttpGet]
         [Route("categories")]
-        public IActionResult GetCategories()
+        public async Task<IActionResult> GetCategories()
         {
-            var categories = projectService.GetClientCategories();
+            var categories = await categoryService.GetClientCategoriesAsync();
             if (categories == null)
             {
                 return BadRequest();
@@ -34,40 +37,15 @@ namespace FurnitureStore.Controllers
 
         [HttpPost]
         [Route("projects/{categoryName}")]
-        public IActionResult GetProjects(string categoryName)
+        public async Task<IActionResult> GetProjects(string categoryName)
         {
-            var projects = projectService.GetProjectsInCategory(categoryName);
+            var projects = await projectService.GetProjectsInCategoryAsync(categoryName);
             if (projects == null)
             {
                 return BadRequest();
             }
 
             return Ok(projects);
-        }
-        [HttpPost]
-        [Route("get/projects/{categoryName}/{projectId}")]
-        public IActionResult GetProject([FromBody] GetProjectModel model)
-        {
-            var project = projectService.GetProject(model.ProjectId);
-            if (project == null)
-            {
-                return BadRequest();
-            }
-
-            return Ok(project);
-        }
-        [HttpPost]
-        [Route("feedback")]
-        public IActionResult SendEmail([FromBody] FeedbackModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            HttpStatusCode sendEmailResult = userService.SendEmail(model);
-
-            return StatusCode((int)sendEmailResult);
         }
     }
 }

@@ -11,9 +11,9 @@ namespace FurnitureStore.Data.Features.Users
     public class UserQueries : IUserQueries
     {
         private readonly UserManager<DbUser> userManager;
-        public UserQueries(UserManager<DbUser> _userManager)
+        public UserQueries(UserManager<DbUser> userManager)
         {
-            userManager = _userManager;
+            this.userManager = userManager;
         }
         public async Task<DbUser> GetUserByEmail(string email)
         {

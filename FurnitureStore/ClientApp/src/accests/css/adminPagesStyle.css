@@ -3,20 +3,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 3%;
-  padding-top: 3%;
+  /* padding-bottom: 3%;
+  padding-top: 3%; */
 }
 
 .project-table-main {
   width: 100%;
+  height: 100vh;
 }
-
-.upload-list-inline .ant-upload-list-item {
+.table-header-div{
+  display: flex;
+  flex-direction: row;
+}
+/* .upload-list-inline .ant-upload-list-item {
   float: left;
   width: 200px;
   margin-inline-end: 8px;
+} */
+
+.add-project-form{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 2%;
 }
 
 .ant-upload-rtl.upload-list-inline .ant-upload-list-item {
   float: right;
+}
+
+.ant-select-selection-item, .ant-select-arrow{
+  color:black!important;
+  font-size: 1em!important;
 }

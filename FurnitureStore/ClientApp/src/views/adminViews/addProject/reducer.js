@@ -19,58 +19,6 @@ const initialState = {
   },
 };
 
-export const addProjectReducer = (state = initialState, action) => {
-  let newState = state;
-
-  switch (action.type) {
-    case ADD_PROJECT_STARTED: {
-      newState = update.set(state, "list.loading", true);
-      newState = update.set(newState, "list.success", false);
-      newState = update.set(newState, "list.errors",{});
-      newState = update.set(newState, "list.failed", false);
-      break;
-    }
-    case ADD_PROJECT_SUCCESS: {
-      newState = update.set(state, "list.loading", false);
-      newState = update.set(newState, "list.failed", false);
-      newState = update.set(newState, "list.success", true);
-      break;
-    }
-    case ADD_PROJECT_FAILED: {
-      newState = update.set(state, "list.loading", false);
-      newState = update.set(newState, "list.success", false);
-      newState = update.set(newState, "list.errors", action.errors);
-      newState = update.set(newState, "list.failed", true);
-      break;
-    }
-    case GET_CATEGORIES_STARTED: {
-      newState = update.set(state, "list.loading", true);
-      newState = update.set(newState, "list.success", false);
-      newState = update.set(newState, "list.errors",{});
-      newState = update.set(newState, "list.failed", false);
-      break;
-    }
-    case GET_CATEGORIES_SUCCESS: {
-      newState = update.set(state, "post.loading", false);
-      newState = update.set(newState, "post.failed", false);
-      newState = update.set(newState, "post.success", true);
-      newState = update.set(newState, 'list.data', action.payload);
-      break;
-    }
-    case GET_CATEGORIES_FAILED: {
-      newState = update.set(state, "list.loading", false);
-      newState = update.set(newState, "list.success", false);
-      newState = update.set(newState, "list.errors", action.errors);
-      newState = update.set(newState, "list.failed", true);
-      break;
-    }
-    default: {
-      return newState;
-    }
-  }
-  return newState;
-};
-
 export function addProject(model) {
   return dispatch => {
     dispatch(addProjectListActions.started());
@@ -139,3 +87,55 @@ export const getCategoriesListActions = {
     }
   }
 }
+
+export const addProjectReducer = (state = initialState, action) => {
+  let newState = state;
+
+  switch (action.type) {
+    case ADD_PROJECT_STARTED: {
+      newState = update.set(state, "list.loading", true);
+      newState = update.set(newState, "list.success", false);
+      newState = update.set(newState, "list.errors",{});
+      newState = update.set(newState, "list.failed", false);
+      break;
+    }
+    case ADD_PROJECT_SUCCESS: {
+      newState = update.set(state, "list.loading", false);
+      newState = update.set(newState, "list.failed", false);
+      newState = update.set(newState, "list.success", true);
+      break;
+    }
+    case ADD_PROJECT_FAILED: {
+      newState = update.set(state, "list.loading", false);
+      newState = update.set(newState, "list.success", false);
+      newState = update.set(newState, "list.errors", action.errors);
+      newState = update.set(newState, "list.failed", true);
+      break;
+    }
+    case GET_CATEGORIES_STARTED: {
+      newState = update.set(state, "list.loading", true);
+      newState = update.set(newState, "list.success", false);
+      newState = update.set(newState, "list.errors",{});
+      newState = update.set(newState, "list.failed", false);
+      break;
+    }
+    case GET_CATEGORIES_SUCCESS: {
+      newState = update.set(state, "post.loading", false);
+      newState = update.set(newState, "post.failed", false);
+      newState = update.set(newState, "post.success", true);
+      newState = update.set(newState, 'list.data', action.payload);
+      break;
+    }
+    case GET_CATEGORIES_FAILED: {
+      newState = update.set(state, "list.loading", false);
+      newState = update.set(newState, "list.success", false);
+      newState = update.set(newState, "list.errors", action.errors);
+      newState = update.set(newState, "list.failed", true);
+      break;
+    }
+    default: {
+      return newState;
+    }
+  }
+  return newState;
+};

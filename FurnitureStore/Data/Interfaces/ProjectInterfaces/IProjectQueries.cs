@@ -8,28 +8,18 @@ namespace FurnitureStore.Data.Interfaces.ProjectInterfaces
 {
     public interface IProjectQueries
     {
-        IEnumerable<ProjectModel> GetProjects();
+        Task<List<ProjectModel>> GetProjectsByCategoryNameAsync(string categoryName);
 
-        List<ProjectModel> GetProjectsByCategoryName(string categoryName);
-       // List<ProjectCardsModel> GetProjectsByCategoryName(string categoryName);
+        Task<List<ProjectModel>> GetProjectsAsync();
 
-        List<GetAdminCategoriesModel> GetAdminCategories();
+        Task<List<Project>> GetProjectsByCategoryIdAsync(int categoryId);
 
-        //List<GetClientCategoriesModel> GetClientCategories();
-        List<string> GetClientCategories();
+        Task<Project> GetProjectByIdAsync(int projectId);
 
-        Category GetCategoryByProjectId(int projectId);
+        Task<ProjectToCategory> GetProjectToCategoryByProjectIdAsync(int projectId);
 
-        ProjectModel GetProjectForUserById(int projectId);
+        Task<List<ProjectToImage>> GetProjectToImagesByProjectIdAsync(int projectId);
 
-        Project GetProjectById(int projectId);
-
-        ProjectToCategory GetProjectToCategoryByProjectId(int projectId);
-
-        List<ProjectToImage> GetProjectToImagesByProjectId(int projectId);
-
-        IEnumerable<ProjectImage> GetProjectImagesByProjectId(int projectId);
-
-        IEnumerable<string> GetStringProjectImages(int projectId);
+        Task<List<ProjectImage>> GetProjectImagesByProjectIdAsync(int projectId);
     }
 }

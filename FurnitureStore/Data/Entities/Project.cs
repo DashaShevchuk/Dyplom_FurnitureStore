@@ -18,6 +18,8 @@ namespace FurnitureStore.Data.Entities
 
         public string Features { get; set; }
 
+        public float Price { get; set; }
+
         public virtual IEnumerable<ProjectToImage> ProjectImages { get; set; }
 
         public virtual ICollection<ProjectToCategory> ProjectCaregory { get; set; }

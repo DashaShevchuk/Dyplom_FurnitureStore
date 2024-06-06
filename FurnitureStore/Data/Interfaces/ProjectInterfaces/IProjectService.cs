@@ -4,27 +4,21 @@ using FurnitureStore.Data.Models.UserModels;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace FurnitureStore.Data.Interfaces.ProjectInterfaces
 {
     public interface IProjectService
     {
-        public List<GetAdminCategoriesModel> GetAdminCategories();
+        Task<List<ProjectModel>> GetProjectsInCategoryAsync(string categoryName);
 
-        //public List<GetClientCategoriesModel> GetClientCategories();
-        public List<string> GetClientCategories();
+        Task<HttpStatusCode> AddProjectAsync(AddProjectModel model);
 
-        public HttpStatusCode AddProject(AddProjectModel model);
+        Task<GetProjectsModel> GetProjectsAsync(PageModel model);
 
-        public GetProjectsModel GetProjects(ProjectPageModel model);
+        Task<HttpStatusCode> DeleteProjectAsync(int projectId);
 
-        //public List<ProjectCardsModel> GetProjectsInCategory(string categoryName);
-        public List<ProjectModel> GetProjectsInCategory(string categoryName);
+        Task<HttpStatusCode> EditProjectAsync(EditProjectModel model);
 
-        public HttpStatusCode DeleteProject(int projectId);
-
-        public HttpStatusCode EditProject(EditProjectModel model);
-
-        public ProjectModel GetProject(int projectId);
     }
 }

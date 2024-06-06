@@ -1,73 +1,497 @@
-/**MAIN**/
-#main {
+@media (max-width: 575.98px) {
+  /**MAIN**/
+ #main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url('../images/main-img1.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .title-white {
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 3em!important;
+    text-align: center;
+    font-weight: 600!important;
+  }
+  
+  .text-white{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 2em!important;
+    text-align: center;
+    font-weight: 400!important;
+  }
+  
+  .to-projects-btn {
+    background-color: #293b38 !important;
+    border-color: #293b38 !important;
+    width: 10em!important;
+    margin-top: 10%;
+    font-size: 1.1em!important;
+  }
+
+  /**ABOUT US**/
+  #aboutUs {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #E5E8E8;
+  }
+  .title-black {
+    font-family: "Roboto", sans-serif!important;
+    width: 100%;
+    font-size: 3em!important;
+    text-align: center;
+    font-weight: 600!important;
+  }
+  .text-black{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 1.5em!important;
+    text-align: center;
+    font-weight: 400!important;
+  }
+  .about-us-text, .image-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 90%;
+   height: 30%;
+  }
+  .big-logo, .girl{
+    width: 80%;
+    height: 80%;
+  }
+ 
+  /**SERVICES**/
+   #services {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+    background-color: #FDF8EE;
+  }
+  .list-container{
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+  }
+  .list {
+    width: 90%;
+    margin-left: 10%;
+  }
+  .list .text-black{
+    text-align: left;
+  }
+  .list-index-yellow {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1c376;
+    margin-top: 50% !important;
+  }
+  
+  /**PROJECTS**/
+  #projects {
+    width: 100%;
+    height: 100vh;
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('../images/main-img2.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .ant-select-selection-item, .ant-select-arrow{
+    color:white!important;
+    font-size: 1.5em!important;
+  }
+  .slider-div {
+    width: 90%;
+    margin-top: 3%;
+  }
+  .slick-slide > div {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    padding: 0px;
+  }
+  
+/**PRICING**/
+ #pricing {
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #e6e6e6;
-}
-.image-container {
-  position: relative;
-  width: 100%;
-}
-.main-text {
-  width: 90%;
-  display: flex;
-  justify-content: right;
+  justify-content: center;
   flex-direction: column;
-  position: absolute;
-  text-align: right;
+  background-color: #E5E8E8;
 }
-.main-titles {
-  font-family: "Roboto", sans-serif;
+#pricing .list-container .list{
+  margin-left: 0%;
 }
-.about-us {
-  font-family: "Roboto", sans-serif;
-}
-.girl1 {
-  width: 60%;
-  height: 60%;
-  margin-right: 30%;
-}
-.to-projects-btn {
-  background-color: #293b38 !important;
-  border-color: #293b38 !important;
-  width: 10em;
-  font-size: 1em !important;
-}
-
-/**ABOUT US**/
-#aboutUs {
-  width: 100%;
-  height: 100vh;
+.list-index-green {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  background-color: #e6e6e6;
+  background-color: #293b38;
+  margin-top: 10% !important;
 }
-.about-us-text {
-  position: absolute;
-  margin-left: 5%;
-  width: 35%;
-  text-align: justify;
-}
-.large-logo-image {
-  width: 50%;
-  height: 50%;
-  margin-right: 5%;
+  
+  /**CONTACTS**/
+  #contacts {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url('../images/main-img3.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .link {
+   text-decoration: none;
+   margin: 0.5%;
+  }
+  
+  .link-text{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    font-size: 2em!important;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
 }
 
+@media (min-width: 576px) and (max-width: 767.98px) {
+  /**MAIN**/
+  #main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url('../images/main-img1.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .title-white {
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 3em!important;
+    text-align: center;
+    font-weight: 600!important;
+  }
+  
+  .text-white{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 2em!important;
+    text-align: center;
+    font-weight: 400!important;
+  }
+  
+  .to-projects-btn {
+    background-color: #293b38 !important;
+    border-color: #293b38 !important;
+    width: 12em!important;
+    margin-top: 10%;
+    font-size: 1.3em!important;
+  }
+
+  /**ABOUT US**/
+  #aboutUs {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #E5E8E8;
+  }
+  .title-black {
+    font-family: "Roboto", sans-serif!important;
+    width: 100%;
+    font-size: 3em!important;
+    text-align: center;
+    font-weight: 600!important;
+  }
+  .text-black{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 2em!important;
+    text-align: center;
+    font-weight: 400!important;
+  }
+  .about-us-text, .image-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 90%;
+  }
+  .big-logo, .girl{
+    width: 80%;
+    height: 80%;
+  }
+  
+  /**SERVICES**/
+   #services {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+    background-color: #FDF8EE;
+  }
+  .list-container{
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+  }
+  .list {
+    width: 70%;
+    margin-left: 10%;
+  }
+  .list .text-black{
+    text-align: left;
+  }
+  .list-index-yellow {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1c376;
+    margin-top: 50% !important;
+  }
+  
+  /**PROJECTS**/
+ #projects {
+    width: 100%;
+    height: 100vh;
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('../images/main-img2.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .ant-select-selection-item, .ant-select-arrow{
+    color:white!important;
+    font-size: 1.5em!important;
+  }
+  .slider-div {
+    width: 90%;
+    margin-top: 3%;
+  }
+  .slick-slide > div {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    padding: 0px;
+  }
+  
+  /**PRICING**/
+  #pricing {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #E5E8E8;
+  }
+  #pricing .list-container .list{
+    margin-left: 0%;
+  }
+  .list-index-green {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #293b38;
+    margin-top: 10% !important;
+  }
+  
+  /**CONTACTS**/
+  #contacts {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url('../images/main-img3.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .link {
+   text-decoration: none;
+   margin: 0.5%;
+  }
+  
+  .link-text{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    font-size: 2em!important;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /**MAIN**/
+  #main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url('../images/main-img1.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .title-white {
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 3em!important;
+    text-align: center;
+    font-weight: 600!important;
+  }
+  
+  .text-white{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 2em!important;
+    text-align: center;
+    font-weight: 400!important;
+  }
+  
+  .to-projects-btn {
+    background-color: #293b38 !important;
+    border-color: #293b38 !important;
+    width: 15em!important;
+    height: 3em!important;
+    margin-top: 10%;
+    font-size: 1.2em!important;
+  }
+
+  /**ABOUT US**/
+  #aboutUs {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #E5E8E8;
+  }
+  .title-black {
+    font-family: "Roboto", sans-serif!important;
+    width: 100%;
+    font-size: 3em!important;
+    text-align: center;
+    font-weight: 600!important;
+  }
+  .text-black{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 2em!important;
+    text-align: center;
+    font-weight: 400!important;
+  }
+  .about-us-text, .image-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+  }
+  .big-logo, .girl{
+  width: 100%;
+  height: 100%;
+} 
+  
 /**SERVICES**/
 #services {
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #e6e6e6;
+  justify-content: center;
+  flex-direction: column-reverse;
+  background-color: #FDF8EE;
 }
-.services-list {
-  position: absolute;
-  margin-left: 60%;
-  width: 30%;
+.list-container{
+  display: flex;
+  flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ width: 100%;
+}
+.list {
+  width: 70%;
+  margin-left: 10%;
+}
+.list .text-black{
+  text-align: left;
+  font-size: 1.3em!important;
 }
 .list-index-yellow {
   width: 20px;
@@ -77,58 +501,245 @@
   justify-content: center;
   align-items: center;
   background-color: #f1c376;
-  margin-top: 100% !important;
+  margin-top: 50% !important;
+}
+  
+  /**PROJECTS**/
+  #projects {
+    width: 100%;
+    height: 100vh;
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('../images/main-img2.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .ant-select-selection-item, .ant-select-arrow{
+    color:white!important;
+    font-size: 1.5em!important;
+  }
+  .slider-div {
+    width: 90%;
+    margin-top: 3%;
+  }
+  .slick-slide > div {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    padding: 0px;
+  }
+  
+  /**PRICING**/
+ #pricing {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #E5E8E8;
+  }
+  #pricing .list-container .list{
+    margin-left: 20%;
+  }
+  .list-index-green {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #293b38;
+    margin-top: 10% !important;
+  }
+  
+  /**CONTACTS**/
+  #contacts {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url('../images/main-img3.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .link {
+   text-decoration: none;
+   margin: 0.5%;
+  }
+  
+  .link-text{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    font-size: 2em!important;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
 }
 
-/**PROJECTS**/
-#projects {
-  width: 100%;
-  height: 100vh;
-  background-color: #e6e6e6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.slider-div {
-  width: 90%;
-  margin-top: 5%;
-}
-.slick-slide > div {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  padding: 0px;
-}
-.title-div {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /**MAIN**/
+  #main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url('../images/main-img1.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .title-white {
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 3em!important;
+    text-align: center;
+    font-weight: 600!important;
+  }
+  
+  .text-white{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 2em!important;
+    text-align: center;
+    font-weight: 400!important;
+  }
+  
+  .to-projects-btn {
+    background-color: #293b38 !important;
+    border-color: #293b38 !important;
+    width: 15em!important;
+    height: 3em!important;
+    margin-top: 10%;
+  }
 
+  /**ABOUT US**/
+   #aboutUs {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    background-color: #E5E8E8;
+  }
+  .title-black {
+    font-family: "Roboto", sans-serif!important;
+    width: 100%;
+    font-size: 3em!important;
+    text-align: center;
+    font-weight: 600!important;
+  }
+  .text-black{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 2em!important;
+    text-align: center;
+    font-weight: 400!important;
+  }
+  .about-us-text, .image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: 0%!important;
+   }
+ .big-logo, .girl{
+   width: 90%!important;
+   height: 90%!important;
+ }
+
+  /**SERVICES**/
+ #services {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+    background-color: #FDF8EE;
+  }
+  .list-container{
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+  }
+  .list {
+    width: 50%;
+  }
+  .list .text-black{
+    text-align: left;
+  }
+  .list-index-yellow {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1c376;
+    margin-top: 50% !important;
+  }
+  
+  /**PROJECTS**/
+ #projects {
+    width: 100%;
+    height: 100vh;
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('../images/main-img2.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .ant-select-selection-item, .ant-select-arrow{
+    color:white!important;
+    font-size: 1.5em!important;
+  }
+  .slider-div {
+    width: 90%;
+    margin-top: 3%;
+  }
+  .slick-slide > div {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    padding: 0px;
+  }
+  
 /**PRICING**/
 #pricing {
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #e6e6e6;
+  justify-content: space-around;
+  flex-direction: row;
+  background-color: #E5E8E8;
 }
-.prising-list {
-  position: absolute;
-  margin-left: 10%;
-}
-.image-container2 {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: right;
-}
-.girl3 {
-  width: 60%;
-  height: 60%;
+#pricing .list-container{
+  margin-left: 0%;
 }
 .list-index-green {
   width: 20px;
@@ -140,778 +751,76 @@
   background-color: #293b38;
   margin-top: 50% !important;
 }
-/**CONTACTS**/
-#contacts {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  background-color: #e6e6e6;
-}
-
-.links-text {
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  text-align: right;
-  align-items: flex-end;
-}
-
-.link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: black;
-  margin: 10px;
-}
-.links {
-  width: 90%;
-  display: flex;
-  justify-content: right;
-  flex-direction: column;
-  text-align: right;
-}
-
-@media (max-width: 575.98px) {
-  /**MAIN**/
-  #main {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-    background-color: #e6e6e6;
-  }
-  .image-container {
-    position: unset;
-    width: 100%;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .main-text {
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: unset;
-    text-align: center;
-  }
-  .main-titles {
-    font-family: "Roboto", sans-serif;
-    text-align: center !important;
-    width: 90%;
-  }
-  .girl1 {
-    width: 100%;
-    height: 100%;
-    margin-right: 0%;
-  }
-  /**ABOUT US**/
-  #aboutUs {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-  }
-  .about-us-text {
-    position: unset;
-    margin-left: 0%;
-    width: 90%;
-    text-align: justify;
-  }
-  .about-us {
-    font-size: 1.5em !important;
-  }
-  .large-logo-image {
-    width: 100%;
-    height: 100%;
-    margin-right: 0%;
-  }
-  /**SERVICES**/
-  #services {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: right;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-  }
-  .services-list {
-    width: 80%;
-    margin-left: 0%;
-    position: unset;
-  }
-  .list-item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: left !important;
-  }
-  /**PROJECTS**/
-  #projects {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  .slider-div {
-    width: 80%;
-    margin-top: 10%;
-  }
-
-  .ant-select-selection-item {
-  font-size: 1.5em!important;
-}
-
-  /**PRICING**/
-  #pricing {
-    width: 100%;
-    height: 100vh;
-    padding-left: 0%;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-  .image-container2 {
-    position: unset;
-    width: 100%;
-  }
-  .girl3 {
-    width: 100%;
-    height: 100%;
-    margin-left: 0%;
-  }
-  .prising-list {
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: unset;
-    text-align: left;
-  }
+ 
   /**CONTACTS**/
   #contacts {
     width: 100%;
     height: 100vh;
-    padding-left: 0%;
-    background-color: #e6e6e6;
     display: flex;
-    justify-content: center;
-    flex-direction: column-reverse;
     align-items: center;
-  }
-  .contacts-div {
-    width: 100%;
-    position: unset;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-  .links-text {
-    width: 100%;
-    display: flex;
     justify-content: center;
     flex-direction: column;
-    position: unset;
-    text-align: center;
-    align-items: center;
+    background-image: url('../images/main-img3.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
-
+  
   .link {
+   text-decoration: none;
+   margin: 0.5%;
+  }
+  
+  .link-text{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    font-size: 2em!important;
     display: flex;
     align-items: center;
-    text-decoration: none;
-    color: black;
-    margin: 10px;
-    justify-content: center;
-    font-size: x-large !important;
-  }
-}
-
-@media (min-width: 576px) and (max-width: 767.98px) {
-  /**MAIN**/
-  #main {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-    background-color: #e6e6e6;
-  }
-  .image-container {
-    position: unset;
-    width: 100%;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .main-text {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: unset;
     text-align: center;
-  }
-  .main-titles {
-    font-family: "Roboto", sans-serif;
-    text-align: center !important;
-    width: 100%;
-  }
-  .girl1 {
-    width: 100%;
-    height: 100%;
-    margin-right: 0%;
-  }
-  /**ABOUT US**/
-  #aboutUs {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-  }
-  .about-us-text {
-    position: unset;
-    margin-left: 0%;
-    width: 90%;
-    text-align: justify;
-  }
-  .about-us {
-    font-size: 1.7em !important;
-  }
-  .large-logo-image {
-    width: 100%;
-    height: 100%;
-    margin-right: 0%;
-  }
-  /**SERVICES**/
-  #services {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: right;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-  }
-  .services-list {
-    width: 80%;
-    margin-left: 0%;
-    position: unset;
-  }
-  .list-item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: left !important;
-  }
-  /**PROJECTS**/
-  #projects {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  .slider-div {
-    width: 80%;
-    margin-top: 10%;
-  }
-  .ant-select-selection-item {
-    font-size: 1.5em!important;
-  }
-  /**PRICING**/
-  #pricing {
-    width: 100%;
-    height: 100vh;
-    padding-left: 0%;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-  .image-container2 {
-    position: unset;
-    width: 100%;
-  }
-  .girl3 {
-    width: 100%;
-    height: 100%;
-    margin-left: 0%;
-  }
-  .prising-list {
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: unset;
-    text-align: left;
-  }
-  /**CONTACTS**/
-  #contacts {
-    width: 100%;
-    height: 100vh;
-    padding-left: 0%;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column-reverse;
-    align-items: center;
-  }
-  .contacts-div {
-    width: 100%;
-    position: unset;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-  .links-text {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: unset;
-    text-align: center;
-    align-items: center;
-  }
-
-  .link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: black;
-    margin: 10px;
-    justify-content: center;
-    font-size: x-large !important;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-  /**MAIN**/
-  #main {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-    background-color: #e6e6e6;
-  }
-  .image-container {
-    position: unset;
-    width: 100%;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .main-text {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: unset;
-    text-align: center;
-  }
-  .main-titles {
-    font-family: "Roboto", sans-serif;
-    text-align: center !important;
-    width: 100%;
-    font-size: 3em !important;
-  }
-  .big-title {
-    font-size: 2.5em !important;
-  }
-  .girl1 {
-    width: 100%;
-    height: 100%;
-    margin-right: 0%;
-  }
-  .to-projects-btn {
-    width: 12em;
-    height: 2em;
-    font-size: 1.3em !important;
-  }
-  /**ABOUT US**/
-  #aboutUs {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-  }
-  .about-us-text {
-    position: unset;
-    margin-left: 0%;
-    width: 90%;
-    text-align: justify;
-  }
-  .about-us {
-    font-size: 2em !important;
-  }
-  .large-logo-image {
-    width: 100%;
-    height: 100%;
-    margin-right: 0%;
-  }
-  /**SERVICES**/
-  #services {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: right;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-  }
-  .services-list {
-    width: 80%;
-    margin-left: 0%;
-    position: unset;
-  }
-  .list-item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: left !important;
-    font-size: 2.3em !important;
-  }
-  /**PROJECTS**/
-  #projects {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  .slider-div {
-    width: 80%;
-    margin-top: 10%;
-  }
-  .ant-select-selection-item {
-    font-size: 1.5em!important;
-  }
-  /**PRICING**/
-  #pricing {
-    width: 100%;
-    height: 100vh;
-    padding-left: 0%;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-  .image-container2 {
-    position: unset;
-    width: 100%;
-  }
-  .girl3 {
-    width: 100%;
-    height: 100%;
-    margin-left: 0%;
-  }
-  .prising-list {
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: unset;
-    text-align: left;
-  }
-  /**CONTACTS**/
-  #contacts {
-    width: 100%;
-    height: 100vh;
-    padding-left: 0%;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column-reverse;
-    align-items: center;
-  }
-  .contacts-div {
-    width: 100%;
-    position: unset;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-  .links-text {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: unset;
-    text-align: center;
-    align-items: center;
-  }
-
-  .link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: black;
-    margin: 10px;
-    justify-content: center;
-    font-size: 2.3em !important;
-  }
-}
-
-@media (min-width: 992px) and (max-width: 1199.98px) {
-  /**MAIN**/
-  #main {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-    background-color: #e6e6e6;
-  }
-  .image-container {
-    position: unset;
-    width: 100%;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .main-text {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: unset;
-    text-align: center;
-  }
-  .main-titles {
-    font-family: "Roboto", sans-serif;
-    text-align: center !important;
-    width: 100%;
-    margin: 0%;
-    font-size: 3em !important;
-  }
-  .big-title {
-    font-size: 2.5em !important;
-  }
-  .girl1 {
-    width: 90%;
-    height: 90%;
-    margin-right: 0%;
-  }
-  .to-projects-btn {
-    width: 12em;
-    height: 2em;
-    font-size: 1.3em !important;
-  }
-  /**ABOUT US**/
-  #aboutUs {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-  }
-  .about-us-text {
-    position: unset;
-    margin: 0%;
-    width: 90%;
-    text-align: justify;
-  }
-  .about-us {
-    font-size: 2em !important;
-  }
-  .large-logo-image {
-    width: 80%;
-    height: 80%;
-    margin-right: 0%;
-  }
-  .image-container2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  /**SERVICES**/
-  #services {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: right;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: center;
-  }
-  .services-list {
-    width: 80%;
-    margin-left: 0%;
-    position: unset;
-  }
-  .list-item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: left !important;
-    font-size: 2.5em !important;
-  }
-  /**PROJECTS**/
-  #projects {
-    width: 100%;
-    height: 100vh;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  .slider-div {
-    width: 80%;
-    margin-top: 10%;
-  }
-.ant-select-selection-item{
-
-}
-  /**PRICING**/
-  #pricing {
-    width: 100%;
-    height: 100vh;
-    padding-left: 0%;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-  .image-container2 {
-    position: unset;
-    width: 100%;
-  }
-  .girl3 {
-    width: 90%;
-    height: 90%;
-    margin-left: 0%;
-  }
-  .prising-list {
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: unset;
-    text-align: left;
-  }
-  /**CONTACTS**/
-  #contacts {
-    width: 100%;
-    height: 100vh;
-    padding-left: 0%;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    flex-direction: column-reverse;
-    align-items: center;
-  }
-  .contacts-div {
-    width: 100%;
-    position: unset;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-  .links-text {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: unset;
-    text-align: center;
-    align-items: center;
-  }
-
-  .link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: black;
-    margin: 10px;
-    justify-content: center;
-    font-size: 2em !important;
   }
 }
 
 @media (min-width: 1200px) {
   /**MAIN**/
-  #main {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    background-color: #e6e6e6;
-  }
-  .image-container {
-    position: relative;
-    width: 100%;
-  }
-  .main-text {
-    width: 90%;
-    display: flex;
-    justify-content: right;
-    flex-direction: column;
-    position: absolute;
-    text-align: right;
-  }
-  .main-titles {
-    font-family: "Roboto", sans-serif;
-  }
-  .about-us {
-    font-family: "Roboto", sans-serif;
-  }
-  .girl1 {
-    width: 60%;
-    height: 60%;
-    margin-right: 30%;
-  }
-  .to-projects-btn {
-    background-color: #293b38 !important;
-    border-color: #293b38 !important;
-    width: 10em;
-    font-size: 1em !important;
-  }
+   #main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-image: url('../images/main-img1.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.title-white {
+  font-family: "Roboto", sans-serif!important;
+  color: white!important;
+  width: 100%;
+  font-size: 3em!important;
+  text-align: center;
+  font-weight: 600!important;
+}
+
+.text-white{
+  font-family: "Roboto", sans-serif!important;
+  color: white!important;
+  width: 100%;
+  font-size: 2em!important;
+  text-align: center;
+  font-weight: 400!important;
+}
+
+.to-projects-btn {
+  background-color: #293b38 !important;
+  border-color: #293b38 !important;
+  width: 15em!important;
+  height: 3em!important;
+  margin-top: 10%;
+}
 
   /**ABOUT US**/
   #aboutUs {
@@ -919,19 +828,37 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-color: #e6e6e6;
+    justify-content: space-around;
+    flex-direction: row;
+    background-color: #E5E8E8;
   }
-  .about-us-text {
-    position: absolute;
-    margin-left: 5%;
-    width: 35%;
-    text-align: justify;
+  .title-black {
+    font-family: "Roboto", sans-serif!important;
+    width: 100%;
+    font-size: 3em!important;
+    text-align: center;
+    font-weight: 600!important;
   }
-  .large-logo-image {
-    width: 50%;
-    height: 50%;
-    margin-right: 5%;
+  .text-black{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    width: 100%;
+    font-size: 2em!important;
+    text-align: center;
+    font-weight: 400!important;
   }
+  .about-us-text, .image-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 50%;
+   margin: 0%!important;
+  }
+.big-logo, .girl{
+  width: 90%!important;
+  height: 90%!important;
+}
 
   /**SERVICES**/
   #services {
@@ -939,12 +866,22 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-color: #e6e6e6;
+    justify-content: space-around;
+    flex-direction: row;
+    background-color: #FDF8EE;
   }
-  .services-list {
-    position: absolute;
-    margin-left: 60%;
-    width: 30%;
+  .list-container{
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 50%;
+  }
+  .list {
+    width: 100%;
+  }
+  .list .text-black{
+    text-align: left;
   }
   .list-index-yellow {
     width: 20px;
@@ -956,6 +893,10 @@
     background-color: #f1c376;
     margin-top: 100% !important;
   }
+  .image{
+    width: 100%;
+    height: 100%;
+  }
 
   /**PROJECTS**/
   #projects {
@@ -966,23 +907,24 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-image: url('../images/main-img2.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .ant-select-selection-item, .ant-select-arrow{
+    color:white!important;
+    font-size: 1.5em!important;
   }
   .slider-div {
     width: 90%;
-    margin-top: 5%;
+    margin-top: 3%;
   }
   .slick-slide > div {
     display: grid;
     place-items: center;
     width: 100%;
     padding: 0px;
-  }
-  .title-div {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
   }
 
   /**PRICING**/
@@ -991,21 +933,12 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-color: #e6e6e6;
+    justify-content: space-around;
+    flex-direction: row;
+    background-color: #E5E8E8;
   }
-  .prising-list {
-    position: absolute;
+  #pricing .list-container{
     margin-left: 10%;
-  }
-  .image-container2 {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: right;
-  }
-  .girl3 {
-    width: 60%;
-    height: 60%;
   }
   .list-index-green {
     width: 20px;
@@ -1017,36 +950,32 @@
     background-color: #293b38;
     margin-top: 50% !important;
   }
+ 
   /**CONTACTS**/
   #contacts {
     width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
-    background-color: #e6e6e6;
-  }
-
-  .links-text {
-    width: 90%;
-    display: flex;
+    justify-content: center;
     flex-direction: column;
-    position: absolute;
-    text-align: right;
-    align-items: flex-end;
+    background-image: url('../images/main-img3.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
-
+  
   .link {
+   text-decoration: none;
+   margin: 0.5%;
+  }
+  
+  .link-text{
+    font-family: "Roboto", sans-serif!important;
+    color: white!important;
+    font-size: 2em!important;
     display: flex;
     align-items: center;
-    text-decoration: none;
-    color: black;
-    margin: 10px;
-  }
-  .links {
-    width: 90%;
-    display: flex;
-    justify-content: right;
-    flex-direction: column;
-    text-align: right;
+    text-align: center;
   }
 }

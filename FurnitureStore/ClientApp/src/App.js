@@ -1,11 +1,13 @@
 import React, { Component, lazy, Suspense } from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-// import { CSpinner } from "@coreui/react";
-import adminRoutes from "./routes/adminRoutes";
-import userRoutes from "./routes/userRoutes";
 import { checkTokenExpiration } from "./views/adminViews/loginPage/reducer";
 import { connect } from "react-redux";
-import Loader from "./components/loader/loader";
+
+import adminRoutes from "./routes/adminRoutes";
+import userRoutes from "./routes/userRoutes";
+
+import Loader from "./components/loaders/userLoader";
+
 const UserLayout = lazy(() => import("./layouts/userLayout/userLayout"));
 const AdminLayout = lazy(() => import("./layouts/adminLayout/adminLayout"));
 const LoginPage = lazy(() => import("./views/adminViews/loginPage/LoginPage"));

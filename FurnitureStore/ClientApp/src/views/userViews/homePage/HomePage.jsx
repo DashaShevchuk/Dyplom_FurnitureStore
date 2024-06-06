@@ -3,37 +3,12 @@ import { connect } from "react-redux";
 import get from "lodash.get";
 import * as getCategoriesListActions from "./reducer";
 import * as getProjectsListActions from "./reducer";
-import * as sendEmailListActions from "./reducer";
-
 import "../../../accests/css/userHomePageStyle.css";
-import girl1 from "../../../accests/images/girl1.svg";
 import girl2 from "../../../accests/images/girl2.svg";
 import girl3 from "../../../accests/images/girl3.svg";
-import girl4 from "../../../accests/images/girl4.svg";
 import largeLogo from "../../../accests/images/big logo.svg";
-import {
-  Typography,
-  Button,
-  Form,
-  Card,
-  Popover,
-  List,
-  Space,
-  Input,
-  message,
-  ConfigProvider,
-  Col,
-  Row,
-  Select,
-  Divider,
-} from "antd";
-import Icon from "@ant-design/icons";
-import {
-  InstagramOutlined,
-  PhoneOutlined,
-  RightCircleOutlined,
-  LeftCircleOutlined,
-} from "@ant-design/icons";
+import { Typography, Button, List, Select } from "antd";
+import { RightCircleOutlined, LeftCircleOutlined } from "@ant-design/icons";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProjectCard from "../../../components/userComponents/projectCard";
@@ -44,7 +19,6 @@ import PhoneIcon from "../../../accests/images/phone-icon.png";
 
 const Option = Select.Option;
 const { Title } = Typography;
-const { TextArea } = Input;
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -54,7 +28,7 @@ function SampleNextArrow(props) {
       style={{
         ...style,
         fontSize: "30px",
-        color: "#293b38",
+        color: "#F1C376",
         cursor: "pointer",
       }}
       onClick={onClick}
@@ -70,7 +44,7 @@ function SamplePrevArrow(props) {
       style={{
         ...style,
         fontSize: "30px",
-        color: "#293b38",
+        color: "#F1C376",
         cursor: "pointer",
       }}
       onClick={onClick}
@@ -78,17 +52,45 @@ function SamplePrevArrow(props) {
   );
 }
 class UserHomePage extends Component {
+  state = {
+    selectedCategory: " ",
+  };
+  
   componentDidMount() {
     this.props.getCategories();
   }
-  componentDidUpdate(prevProps) {
-    if (prevProps.categories !== this.props.categories) {
-      const defaultCategory = this.props.categories[0];
-      this.setState({ defaultCategory }, () => {
-        this.props.getProjects(defaultCategory);
-      });
+
+  // componentDidUpdate(prevProps) {
+  //   const { categories } = this.props;
+  //   if (categories !== prevProps.categories) {
+  //     this.setState({
+  //       selectedCategory:
+  //         categories && categories.length > 0 ? categories[0] : null,
+  //     });
+  //   }
+  //   this.props.getProjects(this.state.selectedCategory);
+  // }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { categories } = this.props;
+    
+    if (categories !== prevProps.categories) {
+      const newSelectedCategory = categories && categories.length > 0 ? categories[0] : null;
+      
+      if (newSelectedCategory !== this.state.selectedCategory) {
+        this.setState({
+          selectedCategory: newSelectedCategory,
+        }, () => {
+          this.props.getProjects(this.state.selectedCategory);
+        });
+      }
+    }
+
+    if (this.state.selectedCategory !== prevState.selectedCategory) {
+      this.props.getProjects(this.state.selectedCategory);
     }
   }
+
   toProjects = (e) => {
     e.preventDefault();
     const element = document.getElementById("projects");
@@ -99,9 +101,12 @@ class UserHomePage extends Component {
       });
     }
   };
+
   handleCategoryChange = (value) => {
+    this.setState({ selectedCategory: value });
     this.props.getProjects(value);
   };
+
   handlePhoneClick = () => {
     const phoneNumber = "+380687639361";
     window.location.href = `tel:${phoneNumber}`;
@@ -109,10 +114,9 @@ class UserHomePage extends Component {
 
   render() {
     const { categories, projects } = this.props;
-
+    const { selectedCategory } = this.state;
     var settings = {
       dots: false,
-      infinite: true,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />,
       speed: 500,
@@ -122,69 +126,70 @@ class UserHomePage extends Component {
       responsive: [
         {
           breakpoint: 575.98,
-           settings: {
-             slidesToShow: 1,
-             slidesToScroll: 1,
-           },
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
         },
         {
           breakpoint: 600,
-           settings: {
-             slidesToShow: 1,
-             slidesToScroll: 1,
-           },
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
         },
         {
           breakpoint: 700,
-           settings: {
-             slidesToShow: 1,
-             slidesToScroll: 1,
-           },
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
         },
         {
           breakpoint: 800,
-           settings: {
-             slidesToShow: 1,
-             slidesToScroll: 1,
-           },
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
         },
         {
           breakpoint: 890,
-           settings: {
-             slidesToShow: 1,
-             slidesToScroll: 1,
-           },
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
         },
         {
           breakpoint: 900,
-           settings: {
-             slidesToShow: 2,
-             slidesToScroll: 1,
-           },
+          settings: {
+            slidesToShow: Math.min(2, projects && projects.length),
+            slidesToScroll: 1,
+          },
         },
         {
           breakpoint: 1000,
-           settings: {
-             slidesToShow: 2,
-             slidesToScroll: 1,
-           },
+          settings: {
+            slidesToShow: Math.min(2, projects && projects.length),
+            slidesToScroll: 1,
+          },
         },
         {
           breakpoint: 1100,
-           settings: {
-             slidesToShow: 2,
-             slidesToScroll: 1,
-           },
+          settings: {
+            slidesToShow: Math.min(2, projects && projects.length),
+            slidesToScroll: 1,
+          },
         },
         {
           breakpoint: 1196,
-           settings: {
-             slidesToShow: 2,
-             slidesToScroll: 1,
-           },
-        }
+          settings: {
+            slidesToShow: Math.min(2, projects && projects.length),
+            slidesToScroll: 1,
+          },
+        },
       ],
     };
+    settings.slidesToShow = Math.min(3, projects && projects.length);
     const cards =
       projects &&
       projects.map((element, index) => (
@@ -221,60 +226,79 @@ class UserHomePage extends Component {
     return (
       <div>
         <div id="main">
-          <div className="image-container">
-            <img className="girl1" src={girl1} />
-          </div>
-          <div className="main-text">
-            <Title className="main-titles big-title">
-              Все для вашого комфорту
-            </Title>
-            <Title level={3} className="main-titles">
-              Меблі під замовлення
-            </Title>
-            <div>
-              <Button
-                type="primary"
-                className="to-projects-btn m-3"
-                onClick={this.toProjects}
-              >
-                До проектів
-              </Button>
-            </div>
+          <Title className="text-white">Все для вашого комфорту</Title>
+          <Title className="title-white">Меблі під замовлення</Title>
+          <div>
+            <Button
+              type="primary"
+              className="to-projects-btn"
+              onClick={this.toProjects}
+            >
+              До проектів
+            </Button>
           </div>
         </div>
-        <div id="pricing">
+        <div id="aboutUs">
           <div className="about-us-text">
-            <div className="d-flex justify-content-center">
-            <Title className="main-titles">Хто ми</Title>
-            </div>
-            <div className="d-flex justify-content-center">
-            <Title level={3} className="about-us">
+            <Title className="title-black">Хто ми</Title>
+            <Title className="text-black">
               Організаця яка зробить ваші меблі з досвідом понад 15 років Понад
               100 розроблених проектів ДОПИСАТЬ НОРМАЛЬНОГО ТЕКСТА
             </Title>
-            </div>
           </div>
-          <div className="image-container2">
-            <img className="large-logo-image" src={largeLogo} />
+          <div className="image-container">
+            <img className="big-logo" src={largeLogo} />
+          </div>
+        </div>
+
+        <div id="projects">
+          <Title className="title-white">Розробленні проекти</Title>
+          <Select
+            value={selectedCategory}
+            variant="borderless"
+            size="large"
+            className="categoriesSelect"
+            onChange={this.handleCategoryChange}
+            style={{
+              width: 200,
+            }}
+          >
+            {categories &&
+              categories.map((category, index) => (
+                <Option
+                  key={index}
+                  value={category.Name}
+                  className="categoriesSelect"
+                  style={{
+                    background:
+                      category === selectedCategory ? "white" : "white",
+                  }}
+                >
+                  {category.Name}
+                </Option>
+              ))}
+          </Select>
+          <div className="slider-div">
+            <Slider {...settings}>{cards}</Slider>
           </div>
         </div>
         <div id="services">
           <div className="image-container">
-            <img className="girl1" src={girl2} />
+            <img className="girl" src={girl2} />
           </div>
-          <div className="services-list">
-            <Title className="main-titles">Послуги</Title>
+          <div className="list-container">
+            <Title className="title-black">Послуги</Title>
             <List
               itemLayout="horizontal"
               dataSource={servicesList}
               split={false}
-              className="mt-3"
+              className="list"
               renderItem={(item, index) => (
                 <List.Item>
                   <List.Item.Meta
                     avatar={<div className="list-index-yellow"></div>}
                     title={
-                      <Title level={3} className="main-titles list-item d-flex align-items-center">
+                      <Title level={3} className="text-black">
                         {item.title}
                       </Title>
                     }
@@ -284,53 +308,20 @@ class UserHomePage extends Component {
             />
           </div>
         </div>
-        <div id="projects">
-          <div className="title-div">
-            <Title className="main-titles">Розробленні проекти</Title>
-            <Select
-              defaultValue="Кухня"
-              bordered={false}
-              size="large"
-              className="categoriesSelect"
-              onChange={this.handleCategoryChange}
-             
-              style={{
-                width: 200,
-              }}
-            >
-              {categories &&
-                categories.map((category, index) => (
-                  <Option
-                    key={index}
-                    value={category}
-                    
-                    style={{
-                      background: category === "Кухня" ? "white" : "white",
-                    }}
-                  >
-                    {category}
-                  </Option>
-                ))}
-            </Select>
-          </div>
-          <div className="slider-div">
-            <Slider {...settings}>{cards}</Slider>
-          </div>
-        </div>
         <div id="pricing">
-          <div className="prising-list">
-            <Title className="main-titles">Від чого залежить ціна?</Title>
+          <div className="list-container">
+            <Title className="title-black">Від чого залежить ціна?</Title>
             <List
               itemLayout="horizontal"
               dataSource={pricingList}
               split={false}
-              className="mt-3"
+              className="list"
               renderItem={(item, index) => (
                 <List.Item>
                   <List.Item.Meta
                     avatar={<div className="list-index-green"></div>}
                     title={
-                      <Title level={3} className="main-titles list-item">
+                      <Title level={3} className="text-black">
                         {item.title}
                       </Title>
                     }
@@ -339,53 +330,44 @@ class UserHomePage extends Component {
               )}
             />
           </div>
-          <div className="image-container2">
-            <img className="girl3" src={girl3} />
+          <div className="image-container">
+            <img className="girl" src={girl3} />
           </div>
         </div>
         <div id="contacts">
-          <div className="image-container">
-            <img className="girl1" src={girl4} />
-          </div>
-          <div className="links-text">
-            <Title className="main-titles">Як з нами зв'язатися</Title>
-            <a
-              href="https://www.instagram.com/furniture_mspace/"
-              style={{ textDecoration: "none" }}
-            >
-              <Title level={3} class="link">
-                <div className="col-2">
-                  <img src={InstagramIcon} />
-                </div>{" "}
-                @furniture_mspace
-              </Title>
-            </a>
-            <a
-              href="#"
-              onClick={this.handlePhoneClick}
-              style={{ textDecoration: "none" }}
-            >
-              <Title level={3} class="link">
-                <div>
-                  <img src={PhoneIcon} />
-                </div>{" "}
-                +380 68 763 93 61
-              </Title>
-            </a>
-            <a
-              href="https://t.me/+380687639361"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: "none" }}
-            >
-              <Title level={3} class="link">
-                <div>
-                  <img src={TelegramIcon} />
-                </div>{" "}
-                +380 68 763 93 61
-              </Title>
-            </a>
-          </div>
+          <Title className="title-white">Як з нами зв'язатися</Title>
+          <a
+            href="https://www.instagram.com/furniture_mspace/"
+            className="link"
+          >
+            <Title className="link-text">
+              <div>
+                <img src={InstagramIcon} />
+              </div>{" "}
+              @furniture_mspace
+            </Title>
+          </a>
+          <a href="#" onClick={this.handlePhoneClick} className="link">
+            <Title className="link-text">
+              <div>
+                <img src={PhoneIcon} />
+              </div>{" "}
+              +380 68 763 93 61
+            </Title>
+          </a>
+          <a
+            href="https://t.me/+380687639361"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            <Title className="link-text">
+              <div>
+                <img src={TelegramIcon} />
+              </div>{" "}
+              +380 68 763 93 61
+            </Title>
+          </a>
         </div>
       </div>
     );

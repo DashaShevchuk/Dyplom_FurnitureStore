@@ -1,5 +1,6 @@
 ﻿using FurnitureStore.Data.EfContext;
 using FurnitureStore.Data.Entities.AppUser;
+using FurnitureStore.Data.Interfaces.CategoriesInterfaces;
 using FurnitureStore.Data.Interfaces.ProjectInterfaces;
 using FurnitureStore.Data.Interfaces.UserInterfaces;
 using FurnitureStore.Data.Models.AdminModels;
@@ -21,30 +22,32 @@ namespace FurnitureStore.Controllers
     public class AdminController : Controller
     {
         private readonly IProjectService projectService;
-        public AdminController(IProjectService _projectService)
+        private readonly ICategoryService categoryService;
+        public AdminController(IProjectService projectService, ICategoryService categoryService)
         {
-            projectService = _projectService;
+            this.projectService = projectService;
+            this.categoryService = categoryService;
         }
 
         [HttpPost]
         [Route("add/project")]
-        public IActionResult AddProject([FromForm] AddProjectModel model)
+        public async Task<IActionResult> AddProject([FromForm] AddProjectModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            HttpStatusCode addProjectResult = projectService.AddProject(model);
+            HttpStatusCode addProjectResult = await projectService.AddProjectAsync(model);
 
             return StatusCode((int)addProjectResult);
         }
 
         [HttpGet]
         [Route("get/categories")]
-        public IActionResult GetCategories()
+        public async Task<IActionResult> GetCategories()
         {
-            var categories = projectService.GetAdminCategories();
+            var categories = await categoryService.GetAdminCategoriesAsync();
             if (categories == null)
             {
                 return BadRequest();
@@ -54,9 +57,9 @@ namespace FurnitureStore.Controllers
 
         [HttpPost]
         [Route("get/projects")]
-        public IActionResult GetProjects([FromBody] ProjectPageModel model)
+        public async Task<IActionResult> GetProjects([FromBody] PageModel model)
         {
-            var projects = projectService.GetProjects(model);
+            var projects = await projectService.GetProjectsAsync(model);
             if (projects == null)
             {
                 return BadRequest();
@@ -67,25 +70,81 @@ namespace FurnitureStore.Controllers
 
         [HttpDelete]
         [Route("delete/project/{projectId}")]
-        public IActionResult DeleteProject(int projectId)
+        public async Task<IActionResult> DeleteProject(int projectId)
         {
-            HttpStatusCode deleteProjectResult = projectService.DeleteProject(projectId);
+            HttpStatusCode deleteProjectResult = await projectService.DeleteProjectAsync(projectId);
 
             return StatusCode((int)deleteProjectResult);
         }
 
         [HttpPost]
         [Route("edit/project/{projectId}")]
-        public IActionResult EditProject([FromForm] EditProjectModel model)
+        public async Task<IActionResult> EditProject([FromForm] EditProjectModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            HttpStatusCode editProject = projectService.EditProject(model);
+            HttpStatusCode editProject = await projectService.EditProjectAsync(model);
 
             return StatusCode((int)editProject);
+        }
+
+        [HttpPost]
+        [Route("get/categories")]
+        public async Task<IActionResult> GetCategories([FromBody] PageModel model)
+        {
+            var categories = await categoryService.GetCategoriesAsync(model);
+            if (categories == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(categories);
+        }
+
+        [HttpDelete]
+        [Route("delete/category/{categoryId}")]
+        public async Task<IActionResult> DeleteCategory(int categoryId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            HttpStatusCode deleteCategoryResult = await categoryService.DeleteCategoryAsync(categoryId);
+
+            return StatusCode((int)deleteCategoryResult);
+        }
+
+        [HttpPost]
+        [Route("edit/category/{categoryId}")]
+        public async Task<IActionResult> EditCategory([FromForm] CategoryModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            HttpStatusCode editCategory = await categoryService.EditCategoryAsync(model);
+
+            return StatusCode((int)editCategory);
+        }
+
+
+        [HttpPost]
+        [Route("add/category")]
+        public async Task<IActionResult> AddCategory([FromForm] CategoryModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            HttpStatusCode addCategoryResult = await categoryService.AddCategoryAsync(model);
+
+            return StatusCode((int)addCategoryResult);
         }
     }
 }

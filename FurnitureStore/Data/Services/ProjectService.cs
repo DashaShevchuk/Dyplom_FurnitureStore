@@ -4,6 +4,7 @@ using FurnitureStore.Data.Features.Users;
 using FurnitureStore.Data.Interfaces.ProjectInterfaces;
 using FurnitureStore.Data.Models.AdminModels;
 using FurnitureStore.Data.Models.UserModels;
+using FurnitureStore.Data.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -12,6 +13,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace FurnitureStore.Data.Service
 {
@@ -21,32 +23,23 @@ namespace FurnitureStore.Data.Service
         private readonly IConfiguration configuration;
         private readonly IProjectCommands projectCommands;
         private readonly IProjectQueries projectQueries;
-        public ProjectService(IWebHostEnvironment _env, 
-                              IConfiguration _configuration, 
-                              IProjectCommands _projectCommands,
-                              IProjectQueries _projectQueries)
+        public ProjectService(IWebHostEnvironment env, 
+                              IConfiguration configuration, 
+                              IProjectCommands projectCommands,
+                              IProjectQueries projectQueries)
         {
-            env = _env;
-            configuration = _configuration;
-            projectCommands = _projectCommands;
-            projectQueries = _projectQueries;
+            this.env = env;
+            this.configuration = configuration;
+            this.projectCommands = projectCommands;
+            this.projectQueries = projectQueries;
         }
 
-        public List<GetAdminCategoriesModel> GetAdminCategories()
+        public async Task<List<ProjectModel>> GetProjectsInCategoryAsync(string categoryName)
         {
-            return projectQueries.GetAdminCategories();
+            return await projectQueries.GetProjectsByCategoryNameAsync(categoryName);
         }
 
-        //public List<GetClientCategoriesModel> GetClientCategories()
-        //{
-        //    return projectQueries.GetClientCategories();
-        //}
-        public List<string> GetClientCategories()
-        {
-            return projectQueries.GetClientCategories();
-        }
-
-        public HttpStatusCode AddProject(AddProjectModel model)
+        public async Task<HttpStatusCode> AddProjectAsync(AddProjectModel model)
         {
             var newProject = new Project
             {
@@ -56,10 +49,11 @@ namespace FurnitureStore.Data.Service
                 Materials = model.Materials,
                 Furniture = model.Furniture,
                 Features = model.Features,
+                Price = model.Price,
             };
-            
-            projectCommands.CreateProject(newProject);
-            projectCommands.CreateProjectToCategory(newProject.Id, model.CategoryId);
+
+            await projectCommands.CreateProjectAsync(newProject);
+            await projectCommands.CreateProjectToCategoryAsync(newProject.Id, model.CategoryId);
 
             string fileDestDir = env.ContentRootPath;
             foreach (var pathConfig in new string[] { "ProjectsImagesFolderPath" })
@@ -76,9 +70,61 @@ namespace FurnitureStore.Data.Service
                 using (var fileStream = new FileStream(Path.Combine(fileDestDir, projectImage.Name), FileMode.Create))
                 {
                     image.CopyTo(fileStream);
-                    projectCommands.CreateProjectImage(projectImage, newProject.Id);
+                    await projectCommands.CreateProjectImageAsync(projectImage, newProject.Id);
                 }
             }
+            return HttpStatusCode.OK;
+        }
+
+        public async Task<HttpStatusCode> DeleteProjectAsync(int projectId)
+        {
+            if (projectId == 0)
+            {
+                return HttpStatusCode.BadRequest;
+            }
+            var project = await projectQueries.GetProjectByIdAsync(projectId);
+            var projectImages = await projectQueries.GetProjectImagesByProjectIdAsync(projectId);
+
+            if (project == null)
+            {
+                return HttpStatusCode.NotFound;
+            }
+
+            string folderPath = $"ProjectsImages/";
+
+            DirectoryInfo imageDirectory = new(folderPath);
+
+            FileInfo[] files = imageDirectory.GetFiles();
+
+            foreach (FileInfo file in files)
+            {
+                foreach (var image in projectImages)
+                {
+                    if (file.Name == image.Name)
+                    {
+                        file.Delete();
+                    }
+                }
+            }
+
+            await projectCommands.DeleteProjectToImagesAsync(projectId);
+            await projectCommands.DeleteProjectImagesAsync(projectId);
+            await projectCommands.DeleteProjectCategoryAsync(projectId);
+            await projectCommands.DeleteProjectAsync(projectId);
+
+            return HttpStatusCode.OK;
+        }
+
+        public async Task<HttpStatusCode> EditProjectAsync(EditProjectModel model)
+        {
+            Project project = await projectQueries.GetProjectByIdAsync(model.Id);
+            if (project == null)
+            {
+                return HttpStatusCode.NotFound;
+            }
+
+            await projectCommands.EditProjectAsync(project, model);
+
             return HttpStatusCode.OK;
         }
 
@@ -128,29 +174,40 @@ namespace FurnitureStore.Data.Service
                     return projects.OrderByDescending(x => x.Tabletop);
                 }
             }
+            else if (columnKey == "price")
+            {
+                if (sortOrder == "ascend")
+                {
+                    return projects.OrderBy(x => x.Price);
+                }
+                else
+                {
+                    return projects.OrderByDescending(x => x.Price);
+                }
+            }
             return projects;
         }
 
-        public GetProjectsModel GetProjects(ProjectPageModel model)
+        public async Task<GetProjectsModel> GetProjectsAsync(PageModel model)
         {
-            IEnumerable<ProjectModel> projects = projectQueries.GetProjects();
+            IEnumerable<ProjectModel> projects = await projectQueries.GetProjectsAsync();
             int count = projects.Count();
-            //int skipPage = (model.Page - 1) * model.PageSize;
+            int skipPage = (model.Page - 1) * model.PageSize;
 
-            //if (model.SearchString != null)
-            //{
-            //    projects = projects.Where(x => x.Name.ToLower().StartsWith(model.SearchString.ToLower())
-            //                             || x.CategoryName.ToLower().StartsWith(model.SearchString.ToLower())
-            //                             || x.Facade.ToLower().StartsWith(model.SearchString.ToLower())
-            //                             || x.Tabletop.Contains(model.SearchString));
-            //}
+            if (model.SearchString != null)
+            {
+                projects = projects.Where(x => x.Name.ToLower().StartsWith(model.SearchString.ToLower())
+                                         || x.CategoryName.ToLower().StartsWith(model.SearchString.ToLower())
+                                         || x.Facade.ToLower().StartsWith(model.SearchString.ToLower())
+                                         || x.Tabletop.Contains(model.SearchString));
+            }
 
-            //if (model.SortOrder != null && model.ColumnKey != null)
-            //{
-            //    projects = SortProjects(projects, model.ColumnKey, model.SortOrder);
-            //}
+            if (model.SortOrder != null && model.ColumnKey != null)
+            {
+                projects = SortProjects(projects, model.ColumnKey, model.SortOrder);
+            }
 
-            //projects = projects.Skip(skipPage).Take(model.PageSize);
+            projects = projects.Skip(skipPage).Take(model.PageSize);
 
             var resultModel = new GetProjectsModel
             {
@@ -160,71 +217,6 @@ namespace FurnitureStore.Data.Service
 
             return resultModel;
         }
-
-        //public List<ProjectCardsModel> GetProjectsInCategory(string categoryName)
-        //{
-        //    return projectQueries.GetProjectsByCategoryName(categoryName);
-        //}
-        public List<ProjectModel> GetProjectsInCategory(string categoryName)
-        {
-            return projectQueries.GetProjectsByCategoryName(categoryName);
-        }
-
-        public HttpStatusCode DeleteProject(int projectId)
-        {
-            if (projectId == 0)
-            {
-                return HttpStatusCode.BadRequest;
-            }
-            var project = projectQueries.GetProjectById(projectId);
-            var projectImages = projectQueries.GetProjectImagesByProjectId(projectId);
-
-            if (project == null)
-            {
-                return HttpStatusCode.NotFound;
-            }
-
-            string folderPath = $"ProjectsImages/";
-
-            DirectoryInfo imageDirectory = new(folderPath);
-
-            FileInfo[] files = imageDirectory.GetFiles();
-
-            foreach (FileInfo file in files)
-            {
-                foreach (var image in projectImages)
-                {
-                    if (file.Name == image.Name)
-                    {
-                        file.Delete();
-                    }
-                }
-            }
-
-            projectCommands.DeleteProjectToImages(projectId);
-            projectCommands.DeleteProjectImages(projectId);
-            projectCommands.DeleteProjectCategory(projectId);
-            projectCommands.DeleteProject(projectId);
-
-            return HttpStatusCode.OK;
-        }
-
-        public HttpStatusCode EditProject(EditProjectModel model)
-        {
-            Project project = projectQueries.GetProjectById(model.Id);
-            if (project == null)
-            {
-                return HttpStatusCode.NotFound;
-            }
-
-            projectCommands.EditProject(project, model);
-
-            return HttpStatusCode.OK;
-        }
-
-        public ProjectModel GetProject(int projectId)
-        {
-            return projectQueries.GetProjectForUserById(projectId);
-        }
+      
     }
 }

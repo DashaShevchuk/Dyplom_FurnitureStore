@@ -12,41 +12,45 @@
 	.st6{display:inline;fill:#334643;}
 	.st7{font-family:'Castellar';}
 	.st8{font-size:43.0226px;}
-	.st9{letter-spacing:27.25;}
+	.st9{letter-spacing:27.3;}
 	.st10{display:none;fill:#334643;}
 	.st11{font-size:42.369px;}
 	.st12{display:none;fill:none;stroke:#334643;stroke-miterlimit:10;}
-	.st13{font-size:47.2842px;}
-	.st14{letter-spacing:29.27;}
-	.st15{font-size:46.5658px;}
+	.st13{fill:none;stroke:#244440;stroke-miterlimit:10;}
+	.st14{fill:#254440;}
+	.st15{font-family:'BellMT';}
+	.st16{font-size:48px;}
 </style>
 <g id="Layer_1">
 </g>
 <g id="Layer_2">
+	<path class="st0" d="M43.5,210.5v-44c1.2,6.2,2.3,12.3,3.5,18.5c5.7,0,11.3,0,17,0c0.8-6.2,1.7-12.3,2.5-18.5v44h20l1-110h-21
+		l-12,34l-2.2-6.9l-8.8-27.1h-21v110H43.5z"/>
+	<polygon class="st0" points="117.5,100.5 150.5,100.5 166.5,118.5 166.5,135.5 146.5,135.5 146.5,126.5 140.5,121.5 127.5,121.5 
+		122.5,126.5 122.5,139.5 127.5,144.5 149.5,144.5 166.5,161.5 166.5,192.5 149.5,210.5 118.5,210.5 101.5,193.5 101.5,175.5 
+		121.5,175.5 121.5,183.5 127.5,189.5 140.5,189.5 146.5,183.5 146.5,171.5 140.5,165.5 119.5,165.5 101.5,148.5 101.5,118.5 	"/>
+	<path class="st0" d="M229.5,100.5h-49l1,110h20v-41h28l17-18v-34L229.5,100.5z M225.5,143.5l-5,4h-19v-26h19l5,4V143.5z"/>
+	<path class="st0" d="M303.5,100.5h-22l-21,110h20l2-7h21l2,7h20L303.5,100.5z M286.5,181.5l7-29l6,29H286.5z"/>
+	<path class="st0" d="M384.5,175.5c7,0,14,0,21,0v17l-18,18h-29l-18-18v-74l17-18h31l17,18v16h-20v-8l-7-5h-12l-6,6v56l6,6h12l6-5
+		C384.5,181.5,384.5,178.5,384.5,175.5z"/>
+	<polygon class="st0" points="484.5,119.5 439.5,119.5 439.5,145.5 460.5,145.5 460.5,164.5 439.5,164.5 439.5,190.5 484.5,190.5 
+		484.5,210.5 419.5,210.5 419.5,100.5 484.5,100.5 	"/>
+	<rect x="136.5" y="225.3" class="st1" width="242.8" height="44.7"/>
+	<text transform="matrix(1 0 0 1 136.4712 242.3262)" class="st0 st2 st3">FURNITURE DESIGN</text>
+	<line class="st4" x1="23" y1="234" x2="134" y2="234"/>
+	<line class="st4" x1="375" y1="234" x2="486" y2="234"/>
+	<line class="st4" x1="294" y1="60" x2="482" y2="60"/>
+	<line class="st4" x1="23" y1="60" x2="211" y2="60"/>
+	<text transform="matrix(0.9907 0 0 1 189.3223 81.0049)" class="st5"><tspan x="0" y="0" class="st6 st7 st8 st9"> </tspan><tspan x="43" y="0" class="st6 st7 st8">M</tspan></text>
+	<text transform="matrix(1.4277 1.264960e-02 -8.860000e-03 1 253.7783 80.8972)" class="st10 st7 st11">S</text>
+	<ellipse class="st12" cx="256.3" cy="65.1" rx="28.5" ry="27.6"/>
 	<g>
-		<path class="st0" d="M43.5,210.5v-44c1.17,6.17,2.33,12.33,3.5,18.5c5.67,0,11.33,0,17,0c0.83-6.17,1.67-12.33,2.5-18.5v44h20
-			l1-110h-21l-12,34l-2.24-6.91L43.5,100.5h-21v110H43.5z"/>
-		<polygon class="st0" points="117.5,100.5 150.5,100.5 166.5,118.5 166.5,135.5 146.5,135.5 146.5,126.5 140.5,121.5 127.5,121.5 
-			122.5,126.5 122.5,139.5 127.5,144.5 149.5,144.5 166.5,161.5 166.5,192.5 149.5,210.5 118.5,210.5 101.5,193.5 101.5,175.5 
-			121.5,175.5 121.5,183.5 127.5,189.5 140.5,189.5 146.5,183.5 146.5,171.5 140.5,165.5 119.5,165.5 101.5,148.5 101.5,118.5 		"/>
-		<path class="st0" d="M229.5,100.5h-49l1,110h20v-41h28l17-18v-34L229.5,100.5z M225.5,143.5l-5,4h-19v-26h19l5,4V143.5z"/>
-		<path class="st0" d="M303.5,100.5h-22l-21,110h20l2-7h21l2,7h20L303.5,100.5z M286.5,181.5l7-29l6,29H286.5z"/>
-		<path class="st0" d="M384.5,175.5c7,0,14,0,21,0v17l-18,18h-29l-18-18v-74l17-18h31l17,18v16h-20v-8l-7-5h-12l-6,6v56l6,6h12l6-5
-			C384.5,181.5,384.5,178.5,384.5,175.5z"/>
-		<polygon class="st0" points="484.5,119.5 439.5,119.5 439.5,145.5 460.5,145.5 460.5,164.5 439.5,164.5 439.5,190.5 484.5,190.5 
-			484.5,210.5 419.5,210.5 419.5,100.5 484.5,100.5 		"/>
-		<rect x="136.47" y="225.26" class="st1" width="242.83" height="44.71"/>
-		<text transform="matrix(1 0 0 1 136.4712 242.3262)" class="st0 st2 st3">FURNITURE DESIGN</text>
-		<line class="st4" x1="23" y1="234" x2="134" y2="234"/>
-		<line class="st4" x1="375" y1="234" x2="486" y2="234"/>
-		<line class="st4" x1="294" y1="60" x2="482" y2="60"/>
-		<line class="st4" x1="23" y1="60" x2="211" y2="60"/>
-		<text transform="matrix(0.9907 0 0 1 189.3223 81.0049)" class="st5"><tspan x="0" y="0" class="st6 st7 st8 st9"> </tspan><tspan x="43.02" y="0" class="st6 st7 st8">M</tspan></text>
-		<text transform="matrix(1.4277 0.0126 -8.860000e-03 1 253.7783 80.8972)" class="st10 st7 st11">S</text>
-		<ellipse class="st12" cx="256.34" cy="65.14" rx="28.53" ry="27.64"/>
-		<text transform="matrix(0.9907 0 0 1 180.4971 80.8643)"><tspan x="0" y="0" class="st0 st7 st13 st14"> </tspan><tspan x="47.28" y="0" class="st0 st7 st13">M</tspan></text>
-		<text transform="matrix(1.4277 0.0126 -8.860000e-03 1 234.3531 89.7284)" class="st0 st7 st15">S</text>
-		<ellipse class="st4" cx="252.19" cy="65.39" rx="31.36" ry="29.89"/>
+		
+			<rect x="231.2" y="38.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 31.4862 195.5145)" class="st13" width="41" height="41.7"/>
+		<rect x="230.1" y="36" class="st1" width="47.9" height="38"/>
+		<text transform="matrix(1 0 0 1 230.1084 68.0645)" class="st14 st15 st16">M</text>
+		<rect x="240.1" y="47" class="st1" width="47.9" height="38"/>
+		<text transform="matrix(1 0 0 1 240.1084 79.0645)" class="st14 st15 st16">S</text>
 	</g>
 </g>
 </svg>

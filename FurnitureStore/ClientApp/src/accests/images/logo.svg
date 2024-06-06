@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 600 600" style="enable-background:new 0 0 600 600;" xml:space="preserve">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#283B38;}
-	.st1{font-family:'Castellar';}
-	.st2{font-size:289.5299px;}
-	.st3{letter-spacing:184.72;}
-	.st4{fill:none;}
-	.st5{fill:none;stroke:#293B38;stroke-width:9;stroke-miterlimit:10;}
-	.st6{fill:none;stroke:#000000;stroke-width:5;stroke-miterlimit:10;}
+	.st0{fill:none;stroke:#244440;stroke-miterlimit:10;}
+	.st1{fill:none;}
+	.st2{fill:#254440;}
+	.st3{font-family:'BellMT';}
+	.st4{font-size:48px;}
 </style>
-<g id="Layer_1">
-</g>
-<g id="Layer_2">
-	<text transform="matrix(0.9907 0 0 1 -133.5029 389.2764)"><tspan x="0" y="0" class="st0 st1 st2 st3"> </tspan><tspan x="289.53" y="0" class="st0 st1 st2">M</tspan></text>
-	<rect x="495.85" y="332.13" class="st4" width="2.75" height="1.38"/>
-	<g>
-		<text transform="matrix(1.2543 0.0111 -8.858726e-03 0.9999 317.3068 389.5926)" class="st0 st1 st2">S</text>
-	</g>
-	<rect x="735.24" y="275.73" class="st4" width="1.38" height="2.75"/>
-	<ellipse class="st5" cx="317.5" cy="282.5" rx="192" ry="186"/>
-	<circle class="st6" cx="608" cy="373" r="7.5"/>
-</g>
+<rect x="9.2" y="8.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -12.3229 29.75)" class="st0" width="41" height="41.7"/>
+<rect x="8.1" y="6" class="st1" width="47.9" height="38"/>
+<text transform="matrix(1 0 0 1 8.1084 38.0645)" class="st2 st3 st4">M</text>
+<rect x="18.1" y="17" class="st1" width="47.9" height="38"/>
+<text transform="matrix(1 0 0 1 18.1084 49.0645)" class="st2 st3 st4">S</text>
 </svg>

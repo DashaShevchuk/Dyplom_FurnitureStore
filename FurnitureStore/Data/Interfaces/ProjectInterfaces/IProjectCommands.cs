@@ -1,24 +1,27 @@
 ﻿using FurnitureStore.Data.Entities;
 using FurnitureStore.Data.Models.AdminModels;
+using System.Threading.Tasks;
 
 namespace FurnitureStore.Data.Interfaces.ProjectInterfaces
 {
     public interface IProjectCommands
     {
-        void CreateProject(Project project);
+        Task CreateProjectAsync(Project project);
 
-        void CreateProjectImage(ProjectImage projectImage, int projectId);
+        Task CreateProjectImageAsync(ProjectImage projectImage, int projectId);
 
-        void CreateProjectToCategory(int projectId, int categoryId);
+        Task CreateProjectToCategoryAsync(int projectId, int categoryId);
 
-        void DeleteProjectToImages(int projectId);
+        Task DeleteProjectToImagesAsync(int projectId);
 
-        void DeleteProjectImages(int projectId);
+        Task DeleteProjectImagesAsync(int projectId);
 
-        void DeleteProjectCategory(int projectId);
+        Task DeleteProjectCategoryAsync(int projectId);
 
-        void DeleteProject(int projectId);
+        Task DeleteProjectAsync(int projectId);
 
-        void EditProject(Project project, EditProjectModel model);
+        Task EditProjectAsync(Project project, EditProjectModel model);
+
+        Task DeleteProjectsInCategoryAsync(int categoryId);
     }
 }

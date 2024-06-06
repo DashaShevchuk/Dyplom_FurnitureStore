@@ -28,6 +28,8 @@ using FurnitureStore.Data.Features.Projects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using FurnitureStore.Data.Services;
+using FurnitureStore.Data.Interfaces.CategoriesInterfaces;
+using FurnitureStore.Data.Features.Categories;
 
 namespace FurnitureStore
 {
@@ -129,13 +131,14 @@ namespace FurnitureStore
             });
 
             services.AddTransient<IUserQueries, UserQueries>();
-            services.AddTransient<IUserService, UserService>();
 
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectCommands, ProjectCommands>();
-            services.AddTransient<IProjectQueries, ProjectQuries>();
+            services.AddTransient<IProjectQueries, ProjectQueries>();
 
-            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ICategoryCommands, CategoryCommands>();
+            services.AddTransient<ICategoryQueries, CategoryQueries>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -194,17 +197,6 @@ namespace FurnitureStore
             {
                 FileProvider = new PhysicalFileProvider(pathuser1),
                 RequestPath = new PathString('/' + Configuration.GetValue<string>("ProjectsImagesFolderPath"))
-
-            });
-            #endregion
-            #region  InitStaticFiles CategoriesImages
-            string pathuser2 = InitStaticFiles.CreateFolder(env, this.Configuration,
-                new string[] { "CategoriesImagesFolderPath" });
-
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(pathuser2),
-                RequestPath = new PathString('/' + Configuration.GetValue<string>("CategoriesImagesFolderPath"))
 
             });
             #endregion

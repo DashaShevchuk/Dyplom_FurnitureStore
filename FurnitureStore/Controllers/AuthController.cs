@@ -18,20 +18,17 @@ namespace FurnitureStore.Controllers
     {
         private readonly UserManager<DbUser> userManager;
         private readonly SignInManager<DbUser> signInManager;
-        private readonly EfDbContext context;
         private readonly IJwtTokenService jwtTokenService;
         private readonly IUserQueries userQueries;
-        public AuthController(EfDbContext _context,
-                               UserManager<DbUser> _userManager,
-                               SignInManager<DbUser> _sigInManager,
-                               IJwtTokenService _jwtTokenService,
-                               IUserQueries _userQueries)
+        public AuthController(UserManager<DbUser> userManager,
+                              SignInManager<DbUser> sigInManager,
+                              IJwtTokenService jwtTokenService,
+                              IUserQueries userQueries)
         {
-            userManager = _userManager;
-            signInManager = _sigInManager;
-            context = _context;
-            jwtTokenService = _jwtTokenService;
-            userQueries = _userQueries;
+            this.userManager = userManager;
+            this.signInManager = sigInManager;
+            this.jwtTokenService = jwtTokenService;
+            this.userQueries = userQueries;
         }
         [HttpPost("login")]
         [AllowAnonymous]

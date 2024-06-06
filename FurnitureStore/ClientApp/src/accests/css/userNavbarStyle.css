@@ -1,12 +1,14 @@
 .header {
     padding: 0px;
-    position: relative;
+    position:fixed;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ddd;
-    box-shadow: 0 0.5px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.5px 3px rgba(0, 0, 0, 0.1); 
+    background-color: rgba(255, 255, 255, 0.9)!important;
+    z-index: 999;
   }
   
   .menu {
@@ -14,6 +16,7 @@
     display: flex;
     justify-content: flex-end;
     border-bottom: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0)!important; 
   }
   
   .logo {
@@ -21,6 +24,8 @@
     padding-left: 10%;
     border: none !important;
     border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
   }
   
   .menu-item {

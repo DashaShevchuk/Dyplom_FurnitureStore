@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FurnitureStore.Data.Features.Projects
 {
@@ -18,75 +19,76 @@ namespace FurnitureStore.Data.Features.Projects
         private readonly IProjectQueries projectQueries;
         private readonly IWebHostEnvironment env;
         private readonly IConfiguration configuration;
-        public ProjectCommands(EfDbContext _context, 
-            IProjectQueries _projectQueries,
-            IWebHostEnvironment _env,
-            IConfiguration _configuration)
+        public ProjectCommands(EfDbContext context, 
+                               IProjectQueries projectQueries,
+                               IWebHostEnvironment env,
+                               IConfiguration configuration)
         {
-            context = _context;
-            projectQueries = _projectQueries;
-            env = _env;
-            configuration = _configuration;
+            this.context = context;
+            this.projectQueries = projectQueries;
+            this.env = env;
+            this.configuration = configuration;
         }
 
-        public void CreateProject(Project project)
+        public async Task CreateProjectAsync(Project project)
         {
-            context.Project.Add(project);
-            context.SaveChanges();
+            await context.Project.AddAsync(project);
+            await context.SaveChangesAsync();
         }
 
-        public void CreateProjectImage(ProjectImage projectImage, int projectId)
+        public async Task CreateProjectImageAsync(ProjectImage projectImage, int projectId)
         {
-            context.ProjectImage.Add(projectImage);
-            context.SaveChanges();
+            await context.ProjectImage.AddAsync(projectImage);
+            await context.SaveChangesAsync();
             ProjectToImage projectToImage = new ()
             {
                 ProjectId = projectId,
                 ImageId = projectImage.Id,
             };
-            context.ProjectToImage.Add(projectToImage);
-            context.SaveChanges();
+            await context.ProjectToImage.AddAsync(projectToImage);
+            await context.SaveChangesAsync();
         }
 
-        public void CreateProjectToCategory(int projectId, int categoryId)
+        public async Task CreateProjectToCategoryAsync(int projectId, int categoryId)
         {
             ProjectToCategory projectToCategory = new()
             {
                 ProjectId = projectId,
                 CategoryId = categoryId
             };
-            context.ProjectToCategories.Add(projectToCategory);
-            context.SaveChanges();
+            await context.ProjectToCategories.AddAsync(projectToCategory);
+            await context.SaveChangesAsync();
         }
 
-        public void DeleteProjectCategory(int projectId)
+        public async Task DeleteProjectCategoryAsync(int projectId)
         {
-            ProjectToCategory projectToCategory = projectQueries.GetProjectToCategoryByProjectId(projectId);
+            ProjectToCategory projectToCategory = await projectQueries.GetProjectToCategoryByProjectIdAsync(projectId);
             context.ProjectToCategories.Remove(projectToCategory);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void DeleteProjectImages(int projectId)
+        public async Task DeleteProjectImagesAsync(int projectId)
         {
-            IEnumerable<ProjectImage> projectImages = projectQueries.GetProjectImagesByProjectId(projectId);
+            List<ProjectImage> projectImages = await projectQueries.GetProjectImagesByProjectIdAsync(projectId);
             context.ProjectImage.RemoveRange(projectImages);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void DeleteProjectToImages(int projectId)
+        public async Task DeleteProjectToImagesAsync(int projectId)
         {
-            List<ProjectToImage> projectToImages = projectQueries.GetProjectToImagesByProjectId(projectId);
+            List<ProjectToImage> projectToImages = await projectQueries.GetProjectToImagesByProjectIdAsync(projectId);
             context.ProjectToImage.RemoveRange(projectToImages);
-            context.SaveChanges();
-        }
-        public void DeleteProject(int projectId)
-        {
-            Project project = projectQueries.GetProjectById(projectId);
-            context.Project.Remove(project);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void EditProject(Project project, EditProjectModel model)
+        public async Task DeleteProjectAsync(int projectId)
+        {
+            Project project = await projectQueries.GetProjectByIdAsync(projectId);
+            context.Project.Remove(project);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task EditProjectAsync(Project project, EditProjectModel model)
         {
            if(project.Name != model.Name)
             {
@@ -112,22 +114,27 @@ namespace FurnitureStore.Data.Features.Projects
             {
                 project.Materials = model.Materials;
             }
-            
+
+            if (project.Price != model.Price)
+            {
+                project.Price = model.Price;
+            }
+
             if (project.Features != model.Features)
             {
                 project.Features = model.Features;
             }
 
-            ProjectToCategory projectToCategory = projectQueries.GetProjectToCategoryByProjectId(project.Id);
+            ProjectToCategory projectToCategory = await projectQueries.GetProjectToCategoryByProjectIdAsync(project.Id);
             if (projectToCategory.CategoryId != model.CategoryId)
             {
-                DeleteProjectCategory(project.Id);
-                CreateProjectToCategory(project.Id, model.CategoryId);
+                await DeleteProjectCategoryAsync(project.Id);
+                await CreateProjectToCategoryAsync(project.Id, model.CategoryId);
             }
 
             if (model.Images != null)
             {
-                var projectImages = projectQueries.GetProjectImagesByProjectId(model.Id);
+                var projectImages = await projectQueries.GetProjectImagesByProjectIdAsync(model.Id);
                 foreach (var projectImage in projectImages)
                 {
                     string imagePath = Path.Combine("ProjectsImages", projectImage.Name);
@@ -136,8 +143,8 @@ namespace FurnitureStore.Data.Features.Projects
                         File.Delete(imagePath);
                     }
                 }
-                DeleteProjectToImages(model.Id);
-                DeleteProjectImages(model.Id);
+                await DeleteProjectToImagesAsync(model.Id);
+                await DeleteProjectImagesAsync(model.Id);
 
                 string fileDestDir = env.ContentRootPath;
                 foreach (var pathConfig in new string[] { "ProjectsImagesFolderPath" })
@@ -157,12 +164,19 @@ namespace FurnitureStore.Data.Features.Projects
                     using (var fileStream = new FileStream(fileDestPath, FileMode.Create))
                     {
                         image.CopyTo(fileStream);
-                        CreateProjectImage(projectImage, project.Id);
+                        await CreateProjectImageAsync(projectImage, project.Id);
                     }
                 }
             }
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
+        }
+
+        public async Task DeleteProjectsInCategoryAsync(int categoryId)
+        {
+           List<Project> projectsInCategory=await projectQueries.GetProjectsByCategoryIdAsync(categoryId);
+           context.Project.RemoveRange(projectsInCategory);
+           await context.SaveChangesAsync();
         }
     }
 }

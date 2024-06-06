@@ -43,38 +43,31 @@ namespace FurnitureStore.Data.SeedData
         {
             Category category1 = new ()
             {
-                Name = "Кухня",
-                ImagePath= "kitchen.jpg"
+                Name = "Кухня"
             };
             Category category2 = new ()
             {
-                Name = "Дитяча",
-                ImagePath = "children-room.jpg"
+                Name = "Дитяча"
             };
             Category category3 = new ()
             {
-                Name = "Передпокій",
-                ImagePath = "hallway.jpg"
+                Name = "Передпокій"
             };
             Category category4 = new()
             {
-                Name = "Вітальня",
-                ImagePath = "living-room.jpg"
+                Name = "Вітальня"
             };
             Category category5 = new()
             {
-                Name = "Спальня",
-                ImagePath = "bedroom.jpg"
+                Name = "Спальня"
             };
             Category category6 = new()
             {
-                Name = "Гардероб",
-                ImagePath = "wardrobe.jpg"
+                Name = "Гардероб"
             };
             Category category7 = new()
             {
-                Name = "Офісні меблі",
-                ImagePath = "office-furniture.jpg"
+                Name = "Офісні меблі"
             };
             context.Categories.Add(category1);
             context.Categories.Add(category2);
