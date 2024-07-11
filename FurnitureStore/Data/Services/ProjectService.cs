@@ -7,6 +7,8 @@ using FurnitureStore.Data.Models.UserModels;
 using FurnitureStore.Data.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

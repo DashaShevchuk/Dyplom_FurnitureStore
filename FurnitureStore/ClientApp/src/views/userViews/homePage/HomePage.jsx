@@ -60,17 +60,6 @@ class UserHomePage extends Component {
     this.props.getCategories();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   const { categories } = this.props;
-  //   if (categories !== prevProps.categories) {
-  //     this.setState({
-  //       selectedCategory:
-  //         categories && categories.length > 0 ? categories[0] : null,
-  //     });
-  //   }
-  //   this.props.getProjects(this.state.selectedCategory);
-  // }
-
   componentDidUpdate(prevProps, prevState) {
     const { categories } = this.props;
     
@@ -267,14 +256,14 @@ class UserHomePage extends Component {
               categories.map((category, index) => (
                 <Option
                   key={index}
-                  value={category.Name}
+                  value={category}
                   className="categoriesSelect"
                   style={{
                     background:
                       category === selectedCategory ? "white" : "white",
                   }}
                 >
-                  {category.Name}
+                  {category}
                 </Option>
               ))}
           </Select>
